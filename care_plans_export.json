@@ -1,0 +1,1159 @@
+{
+  "timestamp": "2025-12-02T12:16:00.811Z",
+  "source": "local_mongodb",
+  "carePlans": [
+    {
+      "_id": "692ecd4ea375c613c095a64f",
+      "patientId": "8e7714a3-073e-483d-a9cf-0b1e8ddf42cc",
+      "patientName": "Matti Virtanen",
+      "status": "active",
+      "startDate": "2025-11-01T00:00:00.000Z",
+      "endDate": "2026-01-31T00:00:00.000Z",
+      "goals": [
+        {
+          "description": "Improve mobility and reduce fall risk",
+          "targetDate": "2025-12-31T00:00:00.000Z",
+          "status": "in_progress",
+          "measurableOutcome": "Patient can walk 50 meters with walker independently",
+          "progress": 45,
+          "_id": "692ecd4ea375c613c095a650"
+        },
+        {
+          "description": "Maintain stable blood pressure",
+          "targetDate": "2026-01-31T00:00:00.000Z",
+          "status": "in_progress",
+          "measurableOutcome": "BP consistently below 140/90",
+          "progress": 70,
+          "_id": "692ecd4ea375c613c095a651"
+        }
+      ],
+      "interventions": [
+        {
+          "visitTemplateId": "692ecd4d84a532566e01bb8b",
+          "visitType": "Morning Care",
+          "frequency": {
+            "type": "daily",
+            "times": 1,
+            "timeOfDay": [
+              "08:00"
+            ],
+            "daysOfWeek": [],
+            "daysOfMonth": []
+          },
+          "duration": 30,
+          "assignedRole": "nurse",
+          "additionalTasks": [],
+          "_id": "692ecd4ea375c613c095a652"
+        },
+        {
+          "visitTemplateId": "692ecd4d84a532566e01bb60",
+          "visitType": "Medication Round",
+          "frequency": {
+            "type": "daily",
+            "times": 3,
+            "timeOfDay": [
+              "08:00",
+              "14:00",
+              "20:00"
+            ],
+            "daysOfWeek": [],
+            "daysOfMonth": []
+          },
+          "duration": 10,
+          "assignedRole": "nurse",
+          "additionalTasks": [],
+          "_id": "692ecd4ea375c613c095a653"
+        },
+        {
+          "visitTemplateId": null,
+          "visitType": "Physical Therapy",
+          "frequency": {
+            "type": "weekly",
+            "times": 3,
+            "daysOfWeek": [
+              1,
+              3,
+              5
+            ],
+            "timeOfDay": [
+              "10:00"
+            ],
+            "daysOfMonth": []
+          },
+          "duration": 45,
+          "assignedRole": "physiotherapist",
+          "additionalTasks": [],
+          "_id": "692ecd4ea375c613c095a654"
+        }
+      ],
+      "conditions": [
+        {
+          "code": "I10",
+          "display": "Essential (primary) hypertension",
+          "severity": "moderate",
+          "onsetDate": "2020-03-15T00:00:00.000Z",
+          "_id": "692ecd4ea375c613c095a655"
+        },
+        {
+          "code": "M62.81",
+          "display": "Muscle weakness",
+          "severity": "moderate",
+          "onsetDate": "2024-08-01T00:00:00.000Z",
+          "_id": "692ecd4ea375c613c095a656"
+        }
+      ],
+      "careTeam": [
+        {
+          "userId": "S0001",
+          "userName": "Anna Virtanen",
+          "role": "Primary Nurse",
+          "isPrimary": true,
+          "_id": "692ecd4ea375c613c095a657"
+        },
+        {
+          "userId": "D0001",
+          "userName": "Dr. Korhonen",
+          "role": "Physician",
+          "isPrimary": false,
+          "_id": "692ecd4ea375c613c095a658"
+        }
+      ],
+      "createdBy": {
+        "userId": "S0001",
+        "userName": "Anna Virtanen"
+      },
+      "lastReviewedDate": "2025-11-01T00:00:00.000Z",
+      "nextReviewDate": "2025-12-01T00:00:00.000Z",
+      "notes": "Patient is motivated and cooperative. Family visits regularly.",
+      "progressNotes": [],
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:14.665Z",
+      "updatedAt": "2025-12-02T11:28:14.665Z"
+    },
+    {
+      "_id": "692ecd4ea375c613c095a659",
+      "patientId": "3dfc00cf-c0fa-4d29-8642-2345b8b06e23",
+      "patientName": "Aino Korhonen",
+      "status": "active",
+      "startDate": "2025-10-15T00:00:00.000Z",
+      "endDate": "2026-02-15T00:00:00.000Z",
+      "goals": [
+        {
+          "description": "Improve cognitive function and memory",
+          "targetDate": "2026-01-15T00:00:00.000Z",
+          "status": "in_progress",
+          "measurableOutcome": "Patient can recall daily activities and recognize family members",
+          "progress": 30,
+          "_id": "692ecd4ea375c613c095a65a"
+        },
+        {
+          "description": "Maintain adequate nutrition and hydration",
+          "targetDate": "2026-02-15T00:00:00.000Z",
+          "status": "in_progress",
+          "measurableOutcome": "Patient maintains weight within 5% of baseline",
+          "progress": 85,
+          "_id": "692ecd4ea375c613c095a65b"
+        }
+      ],
+      "interventions": [
+        {
+          "visitTemplateId": "692ecd4d84a532566e01bb8b",
+          "visitType": "Morning Care",
+          "frequency": {
+            "type": "daily",
+            "times": 1,
+            "timeOfDay": [
+              "07:30"
+            ],
+            "daysOfWeek": [],
+            "daysOfMonth": []
+          },
+          "duration": 45,
+          "assignedRole": "nurse",
+          "additionalTasks": [],
+          "_id": "692ecd4ea375c613c095a65c"
+        },
+        {
+          "visitTemplateId": "692ecd4d84a532566e01bb76",
+          "visitType": "Meal Assistance",
+          "frequency": {
+            "type": "daily",
+            "times": 3,
+            "timeOfDay": [
+              "08:00",
+              "12:00",
+              "18:00"
+            ],
+            "daysOfWeek": [],
+            "daysOfMonth": []
+          },
+          "duration": 30,
+          "assignedRole": "care_assistant",
+          "additionalTasks": [],
+          "_id": "692ecd4ea375c613c095a65d"
+        },
+        {
+          "visitTemplateId": null,
+          "visitType": "Cognitive Therapy",
+          "frequency": {
+            "type": "weekly",
+            "times": 2,
+            "daysOfWeek": [
+              2,
+              4
+            ],
+            "timeOfDay": [
+              "14:00"
+            ],
+            "daysOfMonth": []
+          },
+          "duration": 60,
+          "assignedRole": "any",
+          "additionalTasks": [],
+          "_id": "692ecd4ea375c613c095a65e"
+        }
+      ],
+      "conditions": [
+        {
+          "code": "F03",
+          "display": "Unspecified dementia",
+          "severity": "moderate",
+          "onsetDate": "2022-06-01T00:00:00.000Z",
+          "_id": "692ecd4ea375c613c095a65f"
+        },
+        {
+          "code": "R63.4",
+          "display": "Abnormal weight loss",
+          "severity": "mild",
+          "onsetDate": "2025-09-01T00:00:00.000Z",
+          "_id": "692ecd4ea375c613c095a660"
+        }
+      ],
+      "careTeam": [
+        {
+          "userId": "S0002",
+          "userName": "Matti Korhonen",
+          "role": "Primary Nurse",
+          "isPrimary": true,
+          "_id": "692ecd4ea375c613c095a661"
+        },
+        {
+          "userId": "S0003",
+          "userName": "Liisa Nieminen",
+          "role": "Care Assistant",
+          "isPrimary": false,
+          "_id": "692ecd4ea375c613c095a662"
+        }
+      ],
+      "createdBy": {
+        "userId": "S0002",
+        "userName": "Matti Korhonen"
+      },
+      "lastReviewedDate": "2025-10-15T00:00:00.000Z",
+      "nextReviewDate": "2025-11-15T00:00:00.000Z",
+      "notes": "Patient requires gentle reminders and patience. Responds well to music therapy.",
+      "progressNotes": [],
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:14.667Z",
+      "updatedAt": "2025-12-02T11:28:14.667Z"
+    },
+    {
+      "_id": "692ecd4ea375c613c095a663",
+      "patientId": "cd401a87-49f5-46de-856b-a27424eb75cb",
+      "patientName": "Eino Mäkinen",
+      "status": "active",
+      "startDate": "2025-11-10T00:00:00.000Z",
+      "endDate": "2026-03-10T00:00:00.000Z",
+      "goals": [
+        {
+          "description": "Manage diabetes and maintain stable blood sugar",
+          "targetDate": "2026-02-10T00:00:00.000Z",
+          "status": "in_progress",
+          "measurableOutcome": "HbA1c below 7.0%",
+          "progress": 60,
+          "_id": "692ecd4ea375c613c095a664"
+        },
+        {
+          "description": "Prevent diabetic foot complications",
+          "targetDate": "2026-03-10T00:00:00.000Z",
+          "status": "in_progress",
+          "measurableOutcome": "No new foot ulcers or infections",
+          "progress": 90,
+          "_id": "692ecd4ea375c613c095a665"
+        }
+      ],
+      "interventions": [
+        {
+          "visitTemplateId": "692ecd4d84a532566e01bbbb",
+          "visitType": "Blood Sugar Check",
+          "frequency": {
+            "type": "daily",
+            "times": 4,
+            "timeOfDay": [
+              "07:00",
+              "11:30",
+              "17:00",
+              "21:00"
+            ],
+            "daysOfWeek": [],
+            "daysOfMonth": []
+          },
+          "duration": 10,
+          "assignedRole": "nurse",
+          "additionalTasks": [],
+          "_id": "692ecd4ea375c613c095a666"
+        },
+        {
+          "visitTemplateId": "692ecd4d84a532566e01bb60",
+          "visitType": "Insulin Administration",
+          "frequency": {
+            "type": "daily",
+            "times": 3,
+            "timeOfDay": [
+              "07:30",
+              "12:00",
+              "18:00"
+            ],
+            "daysOfWeek": [],
+            "daysOfMonth": []
+          },
+          "duration": 15,
+          "assignedRole": "nurse",
+          "additionalTasks": [],
+          "_id": "692ecd4ea375c613c095a667"
+        },
+        {
+          "visitTemplateId": null,
+          "visitType": "Foot Care",
+          "frequency": {
+            "type": "weekly",
+            "times": 2,
+            "daysOfWeek": [
+              1,
+              4
+            ],
+            "timeOfDay": [
+              "10:00"
+            ],
+            "daysOfMonth": []
+          },
+          "duration": 30,
+          "assignedRole": "nurse",
+          "additionalTasks": [],
+          "_id": "692ecd4ea375c613c095a668"
+        }
+      ],
+      "conditions": [
+        {
+          "code": "E11",
+          "display": "Type 2 diabetes mellitus",
+          "severity": "moderate",
+          "onsetDate": "2015-03-20T00:00:00.000Z",
+          "_id": "692ecd4ea375c613c095a669"
+        },
+        {
+          "code": "E11.621",
+          "display": "Type 2 diabetes with foot ulcer",
+          "severity": "moderate",
+          "onsetDate": "2024-05-10T00:00:00.000Z",
+          "_id": "692ecd4ea375c613c095a66a"
+        }
+      ],
+      "careTeam": [
+        {
+          "userId": "S0001",
+          "userName": "Anna Virtanen",
+          "role": "Primary Nurse",
+          "isPrimary": true,
+          "_id": "692ecd4ea375c613c095a66b"
+        },
+        {
+          "userId": "D0002",
+          "userName": "Dr. Lahtinen",
+          "role": "Endocrinologist",
+          "isPrimary": false,
+          "_id": "692ecd4ea375c613c095a66c"
+        }
+      ],
+      "createdBy": {
+        "userId": "S0001",
+        "userName": "Anna Virtanen"
+      },
+      "lastReviewedDate": "2025-11-10T00:00:00.000Z",
+      "nextReviewDate": "2025-12-10T00:00:00.000Z",
+      "notes": "Patient is compliant with medication. Family educated on diabetes management.",
+      "progressNotes": [],
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:14.667Z",
+      "updatedAt": "2025-12-02T11:28:14.667Z"
+    }
+  ],
+  "visitTemplates": [
+    {
+      "_id": "692ecd4d84a532566e01bb60",
+      "name": "morning_medication_round",
+      "displayName": "Morning Medication Round",
+      "description": "Morning medication administration with environmental checks",
+      "visitType": "medication_administration",
+      "defaultDuration": 10,
+      "defaultTasks": [
+        {
+          "taskTitle": "Verify patient identity",
+          "isRequired": true,
+          "order": 1,
+          "_id": "692ecd4d84a532566e01bb61"
+        },
+        {
+          "taskTitle": "Check medication orders",
+          "isRequired": true,
+          "order": 2,
+          "_id": "692ecd4d84a532566e01bb62"
+        },
+        {
+          "taskTitle": "Check room supplies (toilet paper, towels)",
+          "isRequired": true,
+          "order": 3,
+          "_id": "692ecd4d84a532566e01bb63"
+        },
+        {
+          "taskTitle": "Administer morning medications",
+          "isRequired": true,
+          "order": 4,
+          "_id": "692ecd4d84a532566e01bb64"
+        },
+        {
+          "taskTitle": "Blood glucose test (if diabetic)",
+          "isRequired": false,
+          "order": 5,
+          "_id": "692ecd4d84a532566e01bb65"
+        },
+        {
+          "taskTitle": "Blood pressure check (if hypertensive)",
+          "isRequired": false,
+          "order": 6,
+          "_id": "692ecd4d84a532566e01bb66"
+        },
+        {
+          "taskTitle": "Document administration",
+          "isRequired": true,
+          "order": 7,
+          "_id": "692ecd4d84a532566e01bb67"
+        }
+      ],
+      "requiredStaffRole": "nurse",
+      "requiresLicense": true,
+      "category": "medical",
+      "isActive": true,
+      "usageCount": 0,
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:13.337Z",
+      "updatedAt": "2025-12-02T11:28:13.337Z"
+    },
+    {
+      "_id": "692ecd4d84a532566e01bb68",
+      "name": "afternoon_medication_round",
+      "displayName": "Afternoon Medication Round",
+      "description": "Afternoon medication administration with pain assessment",
+      "visitType": "medication_administration",
+      "defaultDuration": 5,
+      "defaultTasks": [
+        {
+          "taskTitle": "Verify patient identity",
+          "isRequired": true,
+          "order": 1,
+          "_id": "692ecd4d84a532566e01bb69"
+        },
+        {
+          "taskTitle": "Check medication order",
+          "isRequired": true,
+          "order": 2,
+          "_id": "692ecd4d84a532566e01bb6a"
+        },
+        {
+          "taskTitle": "Administer medication",
+          "isRequired": true,
+          "order": 3,
+          "_id": "692ecd4d84a532566e01bb6b"
+        },
+        {
+          "taskTitle": "Pain assessment (if arthritis patient)",
+          "isRequired": false,
+          "order": 4,
+          "_id": "692ecd4d84a532566e01bb6c"
+        },
+        {
+          "taskTitle": "Document administration",
+          "isRequired": true,
+          "order": 5,
+          "_id": "692ecd4d84a532566e01bb6d"
+        }
+      ],
+      "requiredStaffRole": "nurse",
+      "requiresLicense": true,
+      "category": "medical",
+      "isActive": true,
+      "usageCount": 0,
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:13.339Z",
+      "updatedAt": "2025-12-02T11:28:13.339Z"
+    },
+    {
+      "_id": "692ecd4d84a532566e01bb6e",
+      "name": "evening_medication_round",
+      "displayName": "Evening Medication Round",
+      "description": "Evening medication administration with vital signs and environmental checks",
+      "visitType": "medication_administration",
+      "defaultDuration": 10,
+      "defaultTasks": [
+        {
+          "taskTitle": "Verify patient identity",
+          "isRequired": true,
+          "order": 1,
+          "_id": "692ecd4d84a532566e01bb6f"
+        },
+        {
+          "taskTitle": "Check medication orders",
+          "isRequired": true,
+          "order": 2,
+          "_id": "692ecd4d84a532566e01bb70"
+        },
+        {
+          "taskTitle": "Check room supplies (toilet paper, towels)",
+          "isRequired": true,
+          "order": 3,
+          "_id": "692ecd4d84a532566e01bb71"
+        },
+        {
+          "taskTitle": "Administer evening medications",
+          "isRequired": true,
+          "order": 4,
+          "_id": "692ecd4d84a532566e01bb72"
+        },
+        {
+          "taskTitle": "Blood pressure check (if hypertensive)",
+          "isRequired": false,
+          "order": 5,
+          "_id": "692ecd4d84a532566e01bb73"
+        },
+        {
+          "taskTitle": "Pain assessment (if arthritis patient)",
+          "isRequired": false,
+          "order": 6,
+          "_id": "692ecd4d84a532566e01bb74"
+        },
+        {
+          "taskTitle": "Document administration",
+          "isRequired": true,
+          "order": 7,
+          "_id": "692ecd4d84a532566e01bb75"
+        }
+      ],
+      "requiredStaffRole": "nurse",
+      "requiresLicense": true,
+      "category": "medical",
+      "isActive": true,
+      "usageCount": 0,
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:13.339Z",
+      "updatedAt": "2025-12-02T11:28:13.339Z"
+    },
+    {
+      "_id": "692ecd4d84a532566e01bb76",
+      "name": "breakfast_service",
+      "displayName": "Breakfast Service",
+      "description": "Serve breakfast with meal satisfaction check",
+      "visitType": "meal_assistance",
+      "defaultDuration": 25,
+      "defaultTasks": [
+        {
+          "taskTitle": "Serve breakfast",
+          "isRequired": true,
+          "order": 1,
+          "_id": "692ecd4d84a532566e01bb77"
+        },
+        {
+          "taskTitle": "Assist with eating if needed",
+          "isRequired": false,
+          "order": 2,
+          "_id": "692ecd4d84a532566e01bb78"
+        },
+        {
+          "taskTitle": "Ask about previous evening meal",
+          "isRequired": true,
+          "order": 3,
+          "_id": "692ecd4d84a532566e01bb79"
+        },
+        {
+          "taskTitle": "Check if meal finished",
+          "isRequired": true,
+          "order": 4,
+          "_id": "692ecd4d84a532566e01bb7a"
+        },
+        {
+          "taskTitle": "Document intake",
+          "isRequired": true,
+          "order": 5,
+          "_id": "692ecd4d84a532566e01bb7b"
+        },
+        {
+          "taskTitle": "Note food preferences",
+          "isRequired": false,
+          "order": 6,
+          "_id": "692ecd4d84a532566e01bb7c"
+        }
+      ],
+      "requiredStaffRole": "care_assistant",
+      "requiresLicense": false,
+      "category": "care",
+      "isActive": true,
+      "usageCount": 0,
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:13.339Z",
+      "updatedAt": "2025-12-02T11:28:13.339Z"
+    },
+    {
+      "_id": "692ecd4d84a532566e01bb7d",
+      "name": "lunch_service",
+      "displayName": "Lunch Service",
+      "description": "Serve lunch with meal satisfaction check and fluid monitoring",
+      "visitType": "meal_assistance",
+      "defaultDuration": 25,
+      "defaultTasks": [
+        {
+          "taskTitle": "Serve lunch",
+          "isRequired": true,
+          "order": 1,
+          "_id": "692ecd4d84a532566e01bb7e"
+        },
+        {
+          "taskTitle": "Assist with eating if needed",
+          "isRequired": false,
+          "order": 2,
+          "_id": "692ecd4d84a532566e01bb7f"
+        },
+        {
+          "taskTitle": "Ask about breakfast",
+          "isRequired": true,
+          "order": 3,
+          "_id": "692ecd4d84a532566e01bb80"
+        },
+        {
+          "taskTitle": "Check if meal finished",
+          "isRequired": true,
+          "order": 4,
+          "_id": "692ecd4d84a532566e01bb81"
+        },
+        {
+          "taskTitle": "Document intake",
+          "isRequired": true,
+          "order": 5,
+          "_id": "692ecd4d84a532566e01bb82"
+        },
+        {
+          "taskTitle": "Fluid intake monitoring (if heart failure patient)",
+          "isRequired": false,
+          "order": 6,
+          "_id": "692ecd4d84a532566e01bb83"
+        }
+      ],
+      "requiredStaffRole": "care_assistant",
+      "requiresLicense": false,
+      "category": "care",
+      "isActive": true,
+      "usageCount": 0,
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:13.339Z",
+      "updatedAt": "2025-12-02T11:28:13.339Z"
+    },
+    {
+      "_id": "692ecd4d84a532566e01bb84",
+      "name": "dinner_service",
+      "displayName": "Dinner Service",
+      "description": "Serve dinner with meal satisfaction check",
+      "visitType": "meal_assistance",
+      "defaultDuration": 25,
+      "defaultTasks": [
+        {
+          "taskTitle": "Serve dinner",
+          "isRequired": true,
+          "order": 1,
+          "_id": "692ecd4d84a532566e01bb85"
+        },
+        {
+          "taskTitle": "Assist with eating if needed",
+          "isRequired": false,
+          "order": 2,
+          "_id": "692ecd4d84a532566e01bb86"
+        },
+        {
+          "taskTitle": "Ask about lunch",
+          "isRequired": true,
+          "order": 3,
+          "_id": "692ecd4d84a532566e01bb87"
+        },
+        {
+          "taskTitle": "Check if meal finished",
+          "isRequired": true,
+          "order": 4,
+          "_id": "692ecd4d84a532566e01bb88"
+        },
+        {
+          "taskTitle": "Document intake",
+          "isRequired": true,
+          "order": 5,
+          "_id": "692ecd4d84a532566e01bb89"
+        },
+        {
+          "taskTitle": "Fluid intake monitoring (if heart failure patient)",
+          "isRequired": false,
+          "order": 6,
+          "_id": "692ecd4d84a532566e01bb8a"
+        }
+      ],
+      "requiredStaffRole": "care_assistant",
+      "requiresLicense": false,
+      "category": "care",
+      "isActive": true,
+      "usageCount": 0,
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:13.339Z",
+      "updatedAt": "2025-12-02T11:28:13.339Z"
+    },
+    {
+      "_id": "692ecd4d84a532566e01bb8b",
+      "name": "morning_personal_care",
+      "displayName": "Morning Personal Care",
+      "description": "Morning hygiene and dressing assistance",
+      "visitType": "personal_care_assistance",
+      "defaultDuration": 25,
+      "defaultTasks": [
+        {
+          "taskTitle": "Wake patient gently",
+          "isRequired": true,
+          "order": 1,
+          "_id": "692ecd4d84a532566e01bb8c"
+        },
+        {
+          "taskTitle": "Assist with toileting",
+          "isRequired": true,
+          "order": 2,
+          "_id": "692ecd4d84a532566e01bb8d"
+        },
+        {
+          "taskTitle": "Help with washing/grooming",
+          "isRequired": true,
+          "order": 3,
+          "_id": "692ecd4d84a532566e01bb8e"
+        },
+        {
+          "taskTitle": "Assist with dressing",
+          "isRequired": true,
+          "order": 4,
+          "_id": "692ecd4d84a532566e01bb8f"
+        },
+        {
+          "taskTitle": "Skin assessment",
+          "isRequired": true,
+          "order": 5,
+          "_id": "692ecd4d84a532566e01bb90"
+        },
+        {
+          "taskTitle": "Check call bell placement",
+          "isRequired": true,
+          "order": 6,
+          "_id": "692ecd4d84a532566e01bb91"
+        }
+      ],
+      "requiredStaffRole": "care_assistant",
+      "requiresLicense": false,
+      "category": "care",
+      "isActive": true,
+      "usageCount": 0,
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:13.339Z",
+      "updatedAt": "2025-12-02T11:28:13.339Z"
+    },
+    {
+      "_id": "692ecd4d84a532566e01bb92",
+      "name": "bedtime_care_routine",
+      "displayName": "Bedtime Care Routine",
+      "description": "Evening hygiene and bedtime preparation",
+      "visitType": "personal_care_assistance",
+      "defaultDuration": 20,
+      "defaultTasks": [
+        {
+          "taskTitle": "Assist with toileting",
+          "isRequired": true,
+          "order": 1,
+          "_id": "692ecd4d84a532566e01bb93"
+        },
+        {
+          "taskTitle": "Help with changing into nightwear",
+          "isRequired": true,
+          "order": 2,
+          "_id": "692ecd4d84a532566e01bb94"
+        },
+        {
+          "taskTitle": "Oral care",
+          "isRequired": true,
+          "order": 3,
+          "_id": "692ecd4d84a532566e01bb95"
+        },
+        {
+          "taskTitle": "Position for comfort",
+          "isRequired": true,
+          "order": 4,
+          "_id": "692ecd4d84a532566e01bb96"
+        },
+        {
+          "taskTitle": "Check room temperature",
+          "isRequired": true,
+          "order": 5,
+          "_id": "692ecd4d84a532566e01bb97"
+        },
+        {
+          "taskTitle": "Ensure call bell within reach",
+          "isRequired": true,
+          "order": 6,
+          "_id": "692ecd4d84a532566e01bb98"
+        },
+        {
+          "taskTitle": "Lights out",
+          "isRequired": true,
+          "order": 7,
+          "_id": "692ecd4d84a532566e01bb99"
+        }
+      ],
+      "requiredStaffRole": "care_assistant",
+      "requiresLicense": false,
+      "category": "care",
+      "isActive": true,
+      "usageCount": 0,
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:13.339Z",
+      "updatedAt": "2025-12-02T11:28:13.339Z"
+    },
+    {
+      "_id": "692ecd4d84a532566e01bb9a",
+      "name": "shower_assistance",
+      "displayName": "Shower Assistance",
+      "description": "Full bathing assistance (2-3x weekly)",
+      "visitType": "personal_care_assistance",
+      "defaultDuration": 30,
+      "requiredStaffRole": "care_assistant",
+      "requiresLicense": false,
+      "category": "care",
+      "isActive": true,
+      "usageCount": 0,
+      "defaultTasks": [],
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:13.340Z",
+      "updatedAt": "2025-12-02T11:28:13.340Z"
+    },
+    {
+      "_id": "692ecd4d84a532566e01bb9b",
+      "name": "caregiver_morning_round",
+      "displayName": "Caregiver Morning Round",
+      "description": "Morning personal care and activity proposal",
+      "visitType": "personal_care_assistance",
+      "defaultDuration": 10,
+      "defaultTasks": [
+        {
+          "taskTitle": "Assist with toileting",
+          "isRequired": true,
+          "order": 1,
+          "_id": "692ecd4d84a532566e01bb9c"
+        },
+        {
+          "taskTitle": "Help with mobility",
+          "isRequired": true,
+          "order": 2,
+          "_id": "692ecd4d84a532566e01bb9d"
+        },
+        {
+          "taskTitle": "Social interaction",
+          "isRequired": true,
+          "order": 3,
+          "_id": "692ecd4d84a532566e01bb9e"
+        },
+        {
+          "taskTitle": "Comfort check (temperature, lighting)",
+          "isRequired": true,
+          "order": 4,
+          "_id": "692ecd4d84a532566e01bb9f"
+        },
+        {
+          "taskTitle": "Propose activities",
+          "isRequired": true,
+          "order": 5,
+          "_id": "692ecd4d84a532566e01bba0"
+        },
+        {
+          "taskTitle": "Notify caregiver if interested",
+          "isRequired": false,
+          "order": 6,
+          "_id": "692ecd4d84a532566e01bba1"
+        }
+      ],
+      "requiredStaffRole": "care_assistant",
+      "requiresLicense": false,
+      "category": "care",
+      "isActive": true,
+      "usageCount": 0,
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:13.340Z",
+      "updatedAt": "2025-12-02T11:28:13.340Z"
+    },
+    {
+      "_id": "692ecd4d84a532566e01bba2",
+      "name": "caregiver_afternoon_round",
+      "displayName": "Caregiver Afternoon Round",
+      "description": "Afternoon personal care and activity band review",
+      "visitType": "personal_care_assistance",
+      "defaultDuration": 10,
+      "defaultTasks": [
+        {
+          "taskTitle": "Assist with toileting",
+          "isRequired": true,
+          "order": 1,
+          "_id": "692ecd4d84a532566e01bba3"
+        },
+        {
+          "taskTitle": "Help with mobility",
+          "isRequired": true,
+          "order": 2,
+          "_id": "692ecd4d84a532566e01bba4"
+        },
+        {
+          "taskTitle": "Social interaction",
+          "isRequired": true,
+          "order": 3,
+          "_id": "692ecd4d84a532566e01bba5"
+        },
+        {
+          "taskTitle": "Propose activities",
+          "isRequired": true,
+          "order": 4,
+          "_id": "692ecd4d84a532566e01bba6"
+        },
+        {
+          "taskTitle": "Activity band review (if applicable)",
+          "isRequired": false,
+          "order": 5,
+          "_id": "692ecd4d84a532566e01bba7"
+        },
+        {
+          "taskTitle": "Comfort check",
+          "isRequired": true,
+          "order": 6,
+          "_id": "692ecd4d84a532566e01bba8"
+        }
+      ],
+      "requiredStaffRole": "care_assistant",
+      "requiresLicense": false,
+      "category": "care",
+      "isActive": true,
+      "usageCount": 0,
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:13.340Z",
+      "updatedAt": "2025-12-02T11:28:13.340Z"
+    },
+    {
+      "_id": "692ecd4d84a532566e01bba9",
+      "name": "doctor_medical_examination",
+      "displayName": "Doctor Medical Examination",
+      "description": "Comprehensive medical examination by doctor",
+      "visitType": "medical_assessment",
+      "defaultDuration": 20,
+      "defaultTasks": [
+        {
+          "taskTitle": "Review medical history",
+          "isRequired": true,
+          "order": 1,
+          "_id": "692ecd4d84a532566e01bbaa"
+        },
+        {
+          "taskTitle": "Physical examination",
+          "isRequired": true,
+          "order": 2,
+          "_id": "692ecd4d84a532566e01bbab"
+        },
+        {
+          "taskTitle": "Check vital signs",
+          "isRequired": true,
+          "order": 3,
+          "_id": "692ecd4d84a532566e01bbac"
+        },
+        {
+          "taskTitle": "Review medications",
+          "isRequired": true,
+          "order": 4,
+          "_id": "692ecd4d84a532566e01bbad"
+        },
+        {
+          "taskTitle": "Assess treatment effectiveness",
+          "isRequired": true,
+          "order": 5,
+          "_id": "692ecd4d84a532566e01bbae"
+        },
+        {
+          "taskTitle": "Update care plan if needed",
+          "isRequired": true,
+          "order": 6,
+          "_id": "692ecd4d84a532566e01bbaf"
+        },
+        {
+          "taskTitle": "Document findings",
+          "isRequired": true,
+          "order": 7,
+          "_id": "692ecd4d84a532566e01bbb0"
+        }
+      ],
+      "requiredStaffRole": "doctor",
+      "requiresLicense": true,
+      "category": "medical",
+      "isActive": true,
+      "usageCount": 0,
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:13.340Z",
+      "updatedAt": "2025-12-02T11:28:13.340Z"
+    },
+    {
+      "_id": "692ecd4d84a532566e01bbb1",
+      "name": "comprehensive_vital_signs_check",
+      "displayName": "Comprehensive Vital Signs Check",
+      "description": "Full vital signs assessment for heart failure patients",
+      "visitType": "vital_signs_monitoring",
+      "defaultDuration": 10,
+      "defaultTasks": [
+        {
+          "taskTitle": "Blood pressure",
+          "isRequired": true,
+          "order": 1,
+          "_id": "692ecd4d84a532566e01bbb2"
+        },
+        {
+          "taskTitle": "Heart rate",
+          "isRequired": true,
+          "order": 2,
+          "_id": "692ecd4d84a532566e01bbb3"
+        },
+        {
+          "taskTitle": "Temperature",
+          "isRequired": true,
+          "order": 3,
+          "_id": "692ecd4d84a532566e01bbb4"
+        },
+        {
+          "taskTitle": "Oxygen saturation",
+          "isRequired": true,
+          "order": 4,
+          "_id": "692ecd4d84a532566e01bbb5"
+        },
+        {
+          "taskTitle": "Respiratory rate",
+          "isRequired": true,
+          "order": 5,
+          "_id": "692ecd4d84a532566e01bbb6"
+        },
+        {
+          "taskTitle": "Edema assessment",
+          "isRequired": true,
+          "order": 6,
+          "_id": "692ecd4d84a532566e01bbb7"
+        },
+        {
+          "taskTitle": "Document all readings",
+          "isRequired": true,
+          "order": 7,
+          "_id": "692ecd4d84a532566e01bbb8"
+        },
+        {
+          "taskTitle": "Assess trends",
+          "isRequired": true,
+          "order": 8,
+          "_id": "692ecd4d84a532566e01bbb9"
+        }
+      ],
+      "requiredStaffRole": "nurse",
+      "requiresLicense": true,
+      "category": "assessment",
+      "isActive": true,
+      "usageCount": 0,
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:13.340Z",
+      "updatedAt": "2025-12-02T11:28:13.340Z"
+    },
+    {
+      "_id": "692ecd4d84a532566e01bbba",
+      "name": "night_monitoring_round",
+      "displayName": "Night Monitoring Round",
+      "description": "Hourly night safety and comfort checks",
+      "visitType": "vital_signs_monitoring",
+      "defaultDuration": 5,
+      "requiredStaffRole": "nurse",
+      "requiresLicense": true,
+      "category": "assessment",
+      "isActive": true,
+      "usageCount": 0,
+      "defaultTasks": [],
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:13.340Z",
+      "updatedAt": "2025-12-02T11:28:13.340Z"
+    },
+    {
+      "_id": "692ecd4d84a532566e01bbbb",
+      "name": "blood_glucose_test",
+      "displayName": "Blood Glucose Test",
+      "description": "Blood glucose monitoring for diabetic patients",
+      "visitType": "blood_glucose_monitoring",
+      "defaultDuration": 5,
+      "defaultTasks": [
+        {
+          "taskTitle": "Prepare glucometer",
+          "isRequired": true,
+          "order": 1,
+          "_id": "692ecd4d84a532566e01bbbc"
+        },
+        {
+          "taskTitle": "Clean finger",
+          "isRequired": true,
+          "order": 2,
+          "_id": "692ecd4d84a532566e01bbbd"
+        },
+        {
+          "taskTitle": "Perform test",
+          "isRequired": true,
+          "order": 3,
+          "_id": "692ecd4d84a532566e01bbbe"
+        },
+        {
+          "taskTitle": "Record result",
+          "isRequired": true,
+          "order": 4,
+          "_id": "692ecd4d84a532566e01bbbf"
+        },
+        {
+          "taskTitle": "Assess if insulin needed",
+          "isRequired": true,
+          "order": 5,
+          "_id": "692ecd4d84a532566e01bbc0"
+        },
+        {
+          "taskTitle": "Document",
+          "isRequired": true,
+          "order": 6,
+          "_id": "692ecd4d84a532566e01bbc1"
+        }
+      ],
+      "requiredStaffRole": "nurse",
+      "requiresLicense": true,
+      "category": "assessment",
+      "isActive": true,
+      "usageCount": 0,
+      "__v": 0,
+      "createdAt": "2025-12-02T11:28:13.340Z",
+      "updatedAt": "2025-12-02T11:28:13.340Z"
+    }
+  ]
+}
