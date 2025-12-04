@@ -104,22 +104,22 @@
       ],
       "careTeam": [
         {
-          "userId": "S0001",
+          "userId": "staff-1001",
           "userName": "Anna Virtanen",
           "role": "Primary Nurse",
           "isPrimary": true,
           "_id": "692ecd4ea375c613c095a657"
         },
         {
-          "userId": "D0001",
-          "userName": "Dr. Korhonen",
-          "role": "Physician",
+          "userId": "staff-1003",
+          "userName": "Jukka Mäkinen",
+          "role": "Doctor",
           "isPrimary": false,
           "_id": "692ecd4ea375c613c095a658"
         }
       ],
       "createdBy": {
-        "userId": "S0001",
+        "userId": "staff-1001",
         "userName": "Anna Virtanen"
       },
       "lastReviewedDate": "2025-11-01T00:00:00.000Z",
@@ -361,7 +361,7 @@
       ],
       "careTeam": [
         {
-          "userId": "S0001",
+          "userId": "staff-1001",
           "userName": "Anna Virtanen",
           "role": "Primary Nurse",
           "isPrimary": true,
@@ -376,7 +376,7 @@
         }
       ],
       "createdBy": {
-        "userId": "S0001",
+        "userId": "staff-1001",
         "userName": "Anna Virtanen"
       },
       "lastReviewedDate": "2025-11-10T00:00:00.000Z",

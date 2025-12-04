@@ -1,0 +1,10 @@
+{
+  "patientId": "6af5c335-5849-4a05-97dc-48337b798b35",
+  "patientName": "Matti Virtanen",
+  "visitId": "bc723dca-427a-49f2-8a70-4b03b8ec1c7c",
+  "nurseId": "staff-1001",
+  "nurseName": "Anna Virtanen",
+  "primaryCaregiverId": "staff-1003",
+  "primaryCaregiverName": "Jukka Mäkinen",
+  "testSessionId": "step10-test-1764795191980"
+}

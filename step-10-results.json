@@ -1,0 +1,63 @@
+{
+  "success": false,
+  "timestamp": "2025-12-03T20:53:11.795Z",
+  "steps": {
+    "10.1": {
+      "success": true,
+      "data": {
+        "patientId": "6af5c335-5849-4a05-97dc-48337b798b35",
+        "patientName": "Matti Virtanen",
+        "visitId": "bc723dca-427a-49f2-8a70-4b03b8ec1c7c",
+        "nurseId": "staff-1001",
+        "nurseName": "Anna Virtanen",
+        "primaryCaregiverId": "staff-1003",
+        "primaryCaregiverName": "Jukka Mäkinen",
+        "testSessionId": "step10-test-1764795191980"
+      }
+    },
+    "10.2": {
+      "success": true,
+      "data": {
+        "audio": {
+          "uploadUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/audio_recordings/bc723dca-427a-49f2-8a70-4b03b8ec1c7c/visit_audio_20251203_225312.m4a?Content-Type=audio%2Fmp4&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAV76ZJRZPKOIO3ZFJ%2F20251203%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20251203T205312Z&X-Amz-Expires=300&X-Amz-Signature=1021f17d5006ff6c974545b13fa9aa6a376d4170db4653106ca0b01856699361&X-Amz-SignedHeaders=host%3Bx-amz-acl&x-amz-acl=private",
+          "fileUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/audio_recordings/bc723dca-427a-49f2-8a70-4b03b8ec1c7c/visit_audio_20251203_225312.m4a",
+          "s3Key": "audio_recordings/bc723dca-427a-49f2-8a70-4b03b8ec1c7c/visit_audio_20251203_225312.m4a",
+          "expires": "2025-12-03T20:58:12.278Z",
+          "dataId": "6930a338ab32314025cf77e9",
+          "type": "audio"
+        },
+        "photo": {
+          "uploadUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/photos/bc723dca-427a-49f2-8a70-4b03b8ec1c7c/visit_photo_20251203_225312.jpg?Content-Type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAV76ZJRZPKOIO3ZFJ%2F20251203%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20251203T205312Z&X-Amz-Expires=300&X-Amz-Signature=23b6820a74a776a68d242dc9adb0cea6c6f7bfa9b305351bb4a9dec98cf18df1&X-Amz-SignedHeaders=host%3Bx-amz-acl&x-amz-acl=private",
+          "fileUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/photos/bc723dca-427a-49f2-8a70-4b03b8ec1c7c/visit_photo_20251203_225312.jpg",
+          "s3Key": "photos/bc723dca-427a-49f2-8a70-4b03b8ec1c7c/visit_photo_20251203_225312.jpg",
+          "expires": "2025-12-03T20:58:12.374Z",
+          "dataId": "6930a338ab32314025cf77eb",
+          "type": "photo"
+        }
+      }
+    },
+    "10.3": {
+      "success": true,
+      "data": {
+        "audio": {
+          "s3Key": "audio_recordings/bc723dca-427a-49f2-8a70-4b03b8ec1c7c/visit_audio_20251203_225312.m4a",
+          "fileSize": 209430,
+          "uploadedBy": "staff-1001",
+          "verifiedInS3": true
+        },
+        "photo": {
+          "s3Key": "photos/bc723dca-427a-49f2-8a70-4b03b8ec1c7c/visit_photo_20251203_225312.jpg",
+          "fileSize": 222897,
+          "uploadedBy": "staff-1001",
+          "verifiedInS3": true
+        }
+      }
+    }
+  },
+  "errors": [
+    {
+      "message": "read ECONNRESET",
+      "stack": "Error: read ECONNRESET\n    at AxiosError.from (C:\\Users\\ikett\\Kouluprojekti\\node_modules\\axios\\dist\\node\\axios.cjs:914:14)\n    at RedirectableRequest.handleRequestError (C:\\Users\\ikett\\Kouluprojekti\\node_modules\\axios\\dist\\node\\axios.cjs:3515:25)\n    at RedirectableRequest.emit (node:events:531:35)\n    at eventHandlers.<computed> (C:\\Users\\ikett\\Kouluprojekti\\node_modules\\follow-redirects\\index.js:49:24)\n    at ClientRequest.emit (node:events:519:28)\n    at emitErrorEvent (node:_http_client:105:11)\n    at Socket.socketErrorListener (node:_http_client:518:5)\n    at Socket.emit (node:events:519:28)\n    at emitErrorNT (node:internal/streams/destroy:170:8)\n    at emitErrorCloseNT (node:internal/streams/destroy:129:3)\n    at Axios.request (C:\\Users\\ikett\\Kouluprojekti\\node_modules\\axios\\dist\\node\\axios.cjs:4731:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async confirmUploads (C:\\Users\\ikett\\Kouluprojekti\\scripts\\step-10-upload-workflow.js:572:34)\n    at async main (C:\\Users\\ikett\\Kouluprojekti\\scripts\\step-10-upload-workflow.js:1102:28)"
+    }
+  ]
+}

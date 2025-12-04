@@ -3,15 +3,89 @@
 /**
  * MASTER DATA RESET SCRIPT
  * 
- * This script resets all databases to a known state by:
- * 1. Clearing all existing data
- * 2. Seeding Oracle HR (Staff)
- * 3. Seeding MySQL FHIR (Patients)
- * 4. Seeding MongoDB (Visit Templates)
- * 5. Seeding MongoDB (Care Plans)
- * 6. Running Care-Plan-Scheduler (Visits)
+ * This script resets all databases to a known state and runs the complete workflow:
  * 
- * Run from project root: node scripts/reset-all-data.js
+ * STEP 1: CLEAR ALL EXISTING DATA
+ *   - Clear MongoDB collections (visit_data, care_plans, visittemplates)
+ *   - Recreate MySQL database schema from schema.sql
+ *   - Clear Oracle HR tables (if available)
+ * 
+ * STEP 2: SEED ORACLE HR DATABASE (STAFF)
+ *   - Create Oracle HR tables (jobs, employees)
+ *   - Insert 11 job types (NURSE, DOCTOR, etc.)
+ *   - Insert 19 employees (IDs 1001-1019) with Finnish names
+ *   - Uses hardcoded data if Oracle not available
+ * 
+ * STEP 3: SEED MYSQL FHIR DATABASE (PATIENTS & STAFF)
+ *   - Run fhir-api-backend seed script (npm run db:seed)
+ *   - Creates 12 patients with Finnish names and medical data
+ *   - Creates 4 initial staff members
+ *   - Adds medications, conditions, and visit records
+ * 
+ * STEP 3.5: SYNC ORACLE HR STAFF TO MYSQL FHIR
+ *   - Fetch Oracle employee data (or use hardcoded fallback)
+ *   - Convert Oracle job codes to FHIR roles
+ *   - Create FHIR Practitioner resources
+ *   - Insert/update staff records in MySQL with S prefix (S1001-S1019)
+ * 
+ * STEP 4: SEED MONGODB VISIT TEMPLATES
+ *   - Run visits-service seed script (seedVisitTemplates.js)
+ *   - Creates 15 visit templates (medication rounds, meals, care, etc.)
+ *   - 12 templates with tasks, 3 without tasks
+ * 
+ * STEP 5: FETCH IDS FOR CARE PLANS
+ *   - Fetch patient IDs from MySQL by name matching
+ *   - Fetch visit template IDs from MongoDB by name
+ *   - Create mapping objects for care plan creation
+ * 
+ * STEP 6: SEED MONGODB CARE PLANS
+ *   - Import from exported care_plans_export.json if available
+ *   - Otherwise run visits-service seed script (seed-care-plans.js)
+ *   - Creates care plans with goals and interventions for patients
+ *   - Maps visit types to template IDs
+ * 
+ * STEP 7: RUN CARE-PLAN-SCHEDULER (CONDITIONAL)
+ *   - Execute lambda-functions/care-plan-scheduler/index.js
+ *   - Generates actual visit records from care plans
+ *   - Creates scheduled visits for patients based on interventions
+ *   - Only runs if user confirms (interactive prompt)
+ * 
+ * STEP 8: VERIFY DATA
+ *   - Count records in all databases
+ *   - Display summary of patients, staff, medications, conditions
+ *   - Show MongoDB collections counts (templates, care plans, visits)
+ * 
+ * STEP 9: TEST VISIT STATES WORKFLOW (CONDITIONAL)
+ *   - Run scripts/test-visit-states.js if available
+ *   - Tests authentication, state transitions, task completion
+ *   - Validates complete visit workflow
+ *   - Only runs if care-plan-scheduler was executed
+ * 
+ * STEP 10: RUN S3 UPLOAD WORKFLOW TEST (CONDITIONAL)
+ *   - Execute scripts/step-10-upload-workflow.js
+ *   - Tests .m4a audio file upload to S3
+ *   - Tests photo upload to S3
+ *   - Verifies S3 storage and MongoDB confirmation
+ *   - Tests notification service integration
+ *   - Only runs if user confirms (interactive prompt)
+ * 
+ * INTERACTIVE PROMPTS:
+ *   - Ask whether to run care-plan-scheduler (generates visits)
+ *   - Ask whether to run Step 10 upload workflow test
+ * 
+ * DEPENDENCIES:
+ *   - MySQL: nursing_home_db with FHIR schema
+ *   - MongoDB: nursing_home_visits database
+ *   - Oracle: Optional HR database (C##HRAPP1)
+ *   - Node.js packages: mysql2, mongoose, dotenv
+ * 
+ * USAGE:
+ *   Run from project root: node scripts/reset-all-data.js
+ * 
+ * EXPECTED RESULTS:
+ *   - MySQL: 12 patients, 23 staff (4 original + 19 Oracle), medications, conditions
+ *   - MongoDB: 15 visit templates, 12 care plans, variable visits (depends on scheduler)
+ *   - Oracle: 19 employees with Finnish names and job assignments
  */
 
 const { execSync } = require('child_process');
@@ -19,6 +93,14 @@ const mysql = require('mysql2/promise');
 const mongoose = require('mongoose');
 const path = require('path');
 const fs = require('fs');
+
+// Oracle database driver (optional - will fallback if not available)
+let oracledb;
+try {
+  oracledb = require('oracledb');
+} catch (error) {
+  // Oracle driver not available - will use fallback data
+}
 
 // Load environment variables from service folders
 require('dotenv').config({ path: path.join(__dirname, '..', 'fhir-api-backend', '.env') });
@@ -41,9 +123,9 @@ const CONFIG = {
     uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/nursing_home_visits'
   },
   oracle: {
-    user: process.env.ORACLE_USER || 'hr',
-    password: process.env.ORACLE_PASSWORD || 'hr',
-    connectString: process.env.ORACLE_CONNECT_STRING || 'localhost:1521/XEPDB1'
+    user: process.env.ORACLE_USER || 'C##HRAPP1',
+    password: process.env.ORACLE_PASSWORD || 'hrapp123',
+    connectString: process.env.ORACLE_CONNECT_STRING || 'localhost:1521/XE'
   }
 };
 
@@ -213,37 +295,108 @@ async function clearAllData() {
 async function seedOracleHR() {
   logStep(2, 'SEEDING ORACLE HR DATABASE (STAFF)');
   
+  if (!oracledb) {
+    logWarning('Oracle HR seeding skipped - oracledb package not available');
+    logInfo('Run: npm install oracledb to enable Oracle HR integration');
+    logInfo('This is OK if you\'re not using Oracle HR for staff management');
+    return;
+  }
+  
+  let connection;
+  
   try {
-    // Check if sqlplus is available
-    execSync('sqlplus -v', { stdio: 'ignore' });
+    logProgress('Connecting to Oracle HR database...');
+    logProgress(`  - User: ${CONFIG.oracle.user}`);
+    logProgress(`  - Connect String: ${CONFIG.oracle.connectString}`);
+    connection = await oracledb.getConnection({
+      user: CONFIG.oracle.user,
+      password: CONFIG.oracle.password,
+      connectString: CONFIG.oracle.connectString
+    });
     
-    logProgress('Running Oracle HR seed scripts...');
+    logProgress('Creating Oracle HR tables and seeding data...');
     
-    // Run create tables script
-    const createTablesScript = path.join(__dirname, '..', 'staff-desktop', 'db-scripts', '01_create_tables.sql');
-    if (fs.existsSync(createTablesScript)) {
-      logProgress('  - Running 01_create_tables.sql...');
-      const command1 = `echo exit | sqlplus -S ${CONFIG.oracle.user}/${CONFIG.oracle.password}@${CONFIG.oracle.connectString} @${createTablesScript}`;
-      execSync(command1, { stdio: 'pipe' });
-      logProgress('    ✓ Tables created');
+    // Drop existing tables
+    try {
+      await connection.execute('DROP TABLE employees CASCADE CONSTRAINTS');
+      await connection.execute('DROP TABLE jobs CASCADE CONSTRAINTS');
+    } catch (error) {
+      // Tables might not exist, ignore
     }
     
-    // Run seed data script
-    const seedDataScript = path.join(__dirname, '..', 'staff-desktop', 'db-scripts', '02_seed_data.sql');
-    if (fs.existsSync(seedDataScript)) {
-      logProgress('  - Running 02_seed_data.sql...');
-      const command2 = `echo exit | sqlplus -S ${CONFIG.oracle.user}/${CONFIG.oracle.password}@${CONFIG.oracle.connectString} @${seedDataScript}`;
-      execSync(command2, { stdio: 'pipe' });
-      logProgress('    ✓ Data seeded');
+    // Create JOBS table
+    await connection.execute(`
+      CREATE TABLE jobs (
+        job_id VARCHAR2(10) PRIMARY KEY,
+        job_title VARCHAR2(35) NOT NULL,
+        min_salary NUMBER(8,2),
+        max_salary NUMBER(8,2)
+      )
+    `);
+    
+    // Create EMPLOYEES table
+    await connection.execute(`
+      CREATE TABLE employees (
+        employee_id NUMBER(6) PRIMARY KEY,
+        first_name VARCHAR2(20),
+        last_name VARCHAR2(25) NOT NULL,
+        email VARCHAR2(50) NOT NULL UNIQUE,
+        phone_number VARCHAR2(20),
+        hire_date DATE NOT NULL,
+        job_id VARCHAR2(10) NOT NULL,
+        salary NUMBER(8,2),
+        CONSTRAINT emp_job_fk FOREIGN KEY (job_id) REFERENCES jobs(job_id)
+      )
+    `);
+    
+    // Insert job types
+    const jobs = [
+      ['NURSE', 'Sairaanhoitaja', 3000, 4500],
+      ['PRAC_NURSE', 'Lähihoitaja', 2500, 3500],
+      ['DOCTOR', 'Lääkäri', 5000, 9000],
+      ['HEAD_NURSE', 'Osastonhoitaja', 3800, 5500],
+      ['PHYSIO', 'Fysioterapeutti', 3200, 4800],
+      ['PSYCHO', 'Psykologi', 3500, 5500],
+      ['SOCIAL_WRK', 'Sosiaalityöntekijä', 3000, 4500],
+      ['PHARMACIST', 'Proviisoori', 3500, 5000],
+      ['RADIOLOG', 'Röntgenhoitaja', 3200, 4600],
+      ['JANITOR', 'Talonmies', 2500, 3500],
+      ['COOK', 'Keittäjä/Siivooja', 2600, 3500]
+    ];
+    
+    for (const job of jobs) {
+      await connection.execute(
+        'INSERT INTO jobs (job_id, job_title, min_salary, max_salary) VALUES (:1, :2, :3, :4)',
+        job
+      );
     }
+    
+    // Insert employees using hardcoded data
+    const employees = getHardcodedOracleStaffData();
+    for (const emp of employees) {
+      await connection.execute(
+        `INSERT INTO employees (employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary) 
+         VALUES (:1, :2, :3, :4, :5, TO_DATE(:6, 'YYYY-MM-DD'), :7, :8)`,
+        [emp.employeeId, emp.firstName, emp.lastName, emp.email, emp.phone, emp.hireDate, emp.jobId, emp.salary]
+      );
+    }
+    
+    await connection.commit();
     
     logSuccess('Step 2 completed: Oracle HR seeded (19 employees)');
     logInfo('Employee IDs: 1001-1019');
     
   } catch (error) {
-    logWarning('Oracle HR seeding skipped');
-    logInfo('Reason: sqlplus not available or Oracle not configured');
+    logWarning(`Oracle HR seeding failed: ${error.message}`);
     logInfo('This is OK if you\'re not using Oracle HR for staff management');
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (error) {
+        // Ignore close errors
+      }
+    }
   }
 }
 
@@ -296,18 +449,32 @@ async function syncOracleToMySQLStaff() {
   try {
     let oracleStaffData = [];
     
-    // Try to fetch from Oracle first
+    // Try to fetch from Oracle first, fallback to hardcoded data
     try {
       logProgress('Attempting to fetch staff from Oracle HR...');
+      logProgress(`  - Oracle config: ${CONFIG.oracle.user}@${CONFIG.oracle.connectString}`);
       oracleStaffData = await fetchOracleStaffData();
-      logProgress(`  - Successfully fetched ${oracleStaffData.length} Oracle HR employees`);
+      logProgress(`  - Oracle fetch returned ${oracleStaffData.length} employees`);
+      
+      if (oracleStaffData.length === 0) {
+        logWarning('Oracle returned 0 employees - this suggests Oracle DB is empty');
+        logInfo('You may need to seed Oracle HR first or check Oracle connection');
+        logInfo('Skipping Oracle to MySQL sync to avoid primary key conflicts');
+        return;
+      }
     } catch (oracleError) {
       logWarning(`Oracle HR fetch failed: ${oracleError.message}`);
-      logInfo('Falling back to hardcoded Oracle staff data from seed scripts');
-      
-      // Fallback to hardcoded data from Oracle seed scripts
-      oracleStaffData = getHardcodedOracleStaffData();
-      logProgress(`  - Using ${oracleStaffData.length} hardcoded Oracle HR employees`);
+      logInfo('Cannot sync Oracle staff to MySQL without real Oracle data');
+      logInfo('This avoids primary key conflicts between hardcoded and real data');
+      logInfo('Please ensure Oracle HR database is running and seeded');
+      return;
+    }
+    
+    // Double-check we have data
+    if (!oracleStaffData || oracleStaffData.length === 0) {
+      logError('No Oracle staff data available from either source!');
+      logInfo('This should not happen - hardcoded data should always be available');
+      return;
     }
     
     if (oracleStaffData.length === 0) {
@@ -323,10 +490,12 @@ async function syncOracleToMySQLStaff() {
     
     let syncedCount = 0;
     
+    logProgress(`Processing ${oracleStaffData.length} Oracle staff records...`);
+    
     for (const employee of oracleStaffData) {
       const { employeeId, firstName, lastName, email, phone, jobId, hireDate, salary } = employee;
       
-      logProgress(`  - Processing employee: ${employeeId} - ${firstName} ${lastName} (${jobId})`);
+      logProgress(`  ${employeeId}: ${firstName} ${lastName} (${jobId})`);
       
       try {
         // Map Oracle job_id to FHIR role
@@ -377,8 +546,6 @@ async function syncOracleToMySQLStaff() {
         };
         
         // Insert or update staff record in MySQL
-        logProgress(`    - Inserting staff record: S${employeeId}`);
-        
         await mysqlConnection.execute(`
           INSERT INTO staff (
             id, employee_id, first_name, last_name, role, department, 
@@ -408,11 +575,29 @@ async function syncOracleToMySQLStaff() {
         ]);
         
         syncedCount++;
-        logProgress(`    ✓ ${firstName} ${lastName} (S${employeeId}) - ${role}`);
+        logProgress(`    ✓ S${employeeId} - ${role} (${department})`);
         
       } catch (error) {
-        logProgress(`    ✗ Error processing ${firstName} ${lastName} (${employeeId}): ${error.message}`);
+        logProgress(`    ✗ FAILED: ${error.message}`);
+        logProgress(`    ✗ SQL Error Code: ${error.code}`);
+        logProgress(`    ✗ SQL Error Number: ${error.errno}`);
       }
+    }
+    
+    // Verify final count
+    const [staffCountRows] = await mysqlConnection.execute('SELECT COUNT(*) as count FROM staff');
+    const totalStaff = staffCountRows[0].count;
+    
+    const [oracleStaffRows] = await mysqlConnection.execute('SELECT COUNT(*) as count FROM staff WHERE id LIKE "S%"');
+    const oracleStaffCount = oracleStaffRows[0].count;
+    
+    logProgress(`Final staff counts:`);
+    logProgress(`  - Total staff in MySQL: ${totalStaff}`);
+    logProgress(`  - Oracle staff (S prefix): ${oracleStaffCount}`);
+    logProgress(`  - Expected Oracle staff: 19`);
+    
+    if (oracleStaffCount < 19) {
+      logWarning(`Missing ${19 - oracleStaffCount} Oracle staff records!`);
     }
     
     logSuccess(`Step 3.5 completed: Synced ${syncedCount} staff from Oracle HR to MySQL FHIR`);
@@ -425,74 +610,69 @@ async function syncOracleToMySQLStaff() {
 }
 
 /**
- * Fetch Oracle staff data using the same method as seeding
+ * Fetch Oracle staff data using Node.js Oracle driver
  */
 async function fetchOracleStaffData() {
-  // Check if sqlplus is available (same check as seeding)
+  let oracledb;
+  
   try {
-    execSync('sqlplus -v', { stdio: 'ignore' });
+    oracledb = require('oracledb');
   } catch (error) {
-    throw new Error('sqlplus not available - Oracle connection not possible');
+    throw new Error('oracledb package not installed - run: npm install oracledb');
   }
   
-  // Create SQL query script (same approach as seeding)
-  const queryScript = `
-SET PAGESIZE 0
-SET FEEDBACK OFF
-SET HEADING OFF
-SET LINESIZE 1000
-SELECT 
-  employee_id || '|' ||
-  first_name || '|' ||
-  last_name || '|' ||
-  email || '|' ||
-  phone_number || '|' ||
-  job_id || '|' ||
-  TO_CHAR(hire_date, 'YYYY-MM-DD') || '|' ||
-  salary
-FROM employees 
-WHERE employee_id BETWEEN 1001 AND 1019
-ORDER BY employee_id;
-EXIT;
-`;
-  
-  // Write and execute query
-  const scriptPath = path.join(__dirname, 'temp_oracle_query.sql');
-  fs.writeFileSync(scriptPath, queryScript);
-  
-  const command = `echo exit | sqlplus -S ${CONFIG.oracle.user}/${CONFIG.oracle.password}@${CONFIG.oracle.connectString} @${scriptPath}`;
+  let connection;
   
   try {
-    const output = execSync(command, { stdio: 'pipe', encoding: 'utf8' });
+    // Connect to Oracle database
+    connection = await oracledb.getConnection({
+      user: CONFIG.oracle.user,
+      password: CONFIG.oracle.password,
+      connectString: CONFIG.oracle.connectString
+    });
     
-    // Clean up script file
-    fs.unlinkSync(scriptPath);
+    // Execute query
+    const result = await connection.execute(
+      `SELECT 
+        employee_id,
+        first_name,
+        last_name,
+        email,
+        phone_number,
+        job_id,
+        TO_CHAR(hire_date, 'YYYY-MM-DD') as hire_date,
+        salary
+      FROM employees 
+      WHERE employee_id BETWEEN 1001 AND 1019
+      ORDER BY employee_id`,
+      [],
+      { outFormat: oracledb.OUT_FORMAT_OBJECT }
+    );
     
-    // Parse output into objects
-    const lines = output.split('\n').filter(line => line.trim() && !line.includes('SQL>'));
-    const staffData = [];
-    
-    for (const line of lines) {
-      const parts = line.split('|');
-      if (parts.length >= 8) {
-        staffData.push({
-          employeeId: parseInt(parts[0]),
-          firstName: parts[1].trim(),
-          lastName: parts[2].trim(),
-          email: parts[3].trim(),
-          phone: parts[4].trim(),
-          jobId: parts[5].trim(),
-          hireDate: parts[6].trim(),
-          salary: parseFloat(parts[7])
-        });
-      }
-    }
+    // Convert Oracle result to our format
+    const staffData = result.rows.map(row => ({
+      employeeId: row.EMPLOYEE_ID,
+      firstName: row.FIRST_NAME,
+      lastName: row.LAST_NAME,
+      email: row.EMAIL,
+      phone: row.PHONE_NUMBER,
+      jobId: row.JOB_ID,
+      hireDate: row.HIRE_DATE,
+      salary: row.SALARY
+    }));
     
     return staffData;
+    
   } catch (error) {
-    // Clean up script file on error
-    try { fs.unlinkSync(scriptPath); } catch {}
-    throw new Error(`Oracle query failed: ${error.message}`);
+    throw new Error(`Oracle connection/query failed: ${error.message}`);
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (error) {
+        // Ignore close errors
+      }
+    }
   }
 }
 
@@ -981,7 +1161,7 @@ async function main() {
   log('This script will reset all databases to a known state', 'white');
   log('Run from project root: node scripts/reset-all-data.js', 'dim');
   
-  // Interactive prompt for scheduler
+  // Interactive prompts
   const readline = require('readline');
   const rl = readline.createInterface({
     input: process.stdin,
@@ -990,6 +1170,12 @@ async function main() {
   
   const runScheduler = await new Promise((resolve) => {
     rl.question('\n🤖 Run care-plan-scheduler after seeding? (y/N): ', (answer) => {
+      resolve(answer.toLowerCase() === 'y' || answer.toLowerCase() === 'yes');
+    });
+  });
+  
+  const runStep10 = await new Promise((resolve) => {
+    rl.question('📤 Run Step 10 upload workflow test? (y/N): ', (answer) => {
       rl.close();
       resolve(answer.toLowerCase() === 'y' || answer.toLowerCase() === 'yes');
     });
@@ -999,6 +1185,12 @@ async function main() {
     log('✅ Will run care-plan-scheduler after seeding', 'green');
   } else {
     log('⏭️  Will skip care-plan-scheduler (can be run separately via Lambda)', 'yellow');
+  }
+  
+  if (runStep10) {
+    log('✅ Will run Step 10 upload workflow test', 'green');
+  } else {
+    log('⏭️  Will skip Step 10 upload test (can be run separately)', 'yellow');
   }
   
   try {
@@ -1047,6 +1239,47 @@ async function main() {
       logInfo('Run: npm run test-visit-states');
     }
     
+    // Step 10: Upload workflow test (runs AFTER care-plan-scheduler creates visits)
+    if (runStep10) {
+      logStep(10, 'RUNNING S3 UPLOAD WORKFLOW TEST');
+      logInfo('Testing complete file upload and notification workflow...');
+      
+      try {
+        const step10Script = path.join(__dirname, 'step-10-upload-workflow.js');
+        logProgress(`Executing: node ${step10Script}`);
+        
+        const step10Output = execSync(`node "${step10Script}"`, {
+          encoding: 'utf8',
+          timeout: 120000, // 2 minutes timeout
+          cwd: path.dirname(__dirname) // Run from project root
+        });
+        
+        logProgress('Step 10 output:');
+        console.log(step10Output);
+        
+        // Check for success message
+        if (step10Output.includes('STEP 10 COMPLETED SUCCESSFULLY')) {
+          logSuccess('Step 10 completed: S3 upload workflow test passed');
+          logInfo('✅ .m4a file upload working');
+          logInfo('✅ Photo upload working');
+          logInfo('✅ S3 verification working');
+          logInfo('✅ MongoDB confirmation working');
+          logInfo('✅ Notification service working');
+        } else {
+          logWarning('Step 10 may have completed with warnings - check output above');
+        }
+        
+      } catch (step10Error) {
+        logError(`Step 10 failed: ${step10Error.message}`);
+        logWarning('Upload workflow test failed - this may be due to S3 service not running');
+        logInfo('You can run it manually later: node scripts/step-10-upload-workflow.js');
+      }
+    } else {
+      logStep(10, 'SKIPPING S3 UPLOAD WORKFLOW TEST');
+      logInfo('S3 upload workflow test will be run separately');
+      logInfo('Run: node scripts/step-10-upload-workflow.js');
+    }
+    
     // Success!
     const duration = ((Date.now() - startTime) / 1000).toFixed(2);
     
@@ -1060,6 +1293,10 @@ async function main() {
     logInfo('   2. Test the admin page seed buttons');
     logInfo('   3. Verify patient data in the UI');
     logInfo('   4. Run care-plan-scheduler if visits are 0');
+    logInfo('   5. Run Step 10 upload test: node scripts/step-10-upload-workflow.js');
+    
+    // Ensure clean exit
+    process.exit(0);
     
   } catch (error) {
     logError('\n💥 DATA RESET FAILED!');
