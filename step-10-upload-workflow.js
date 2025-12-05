@@ -288,7 +288,7 @@ async function testPresignedUrls(testData) {
     logProgress('Requesting presigned URL for audio file...');
     const audioRequest = {
       fileName: `${testSessionId}-audio-recording.m4a`,
-      contentType: 'audio/mp4',
+      contentType: 'audio/mpeg', // Changed from audio/mp4 to match validation schema
       visitId: testData.visitId,
       patientId: testData.patientId,
       staffId: testData.nurseId,

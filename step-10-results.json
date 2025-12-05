@@ -1,37 +1,37 @@
 {
   "success": false,
-  "timestamp": "2025-12-03T20:53:11.795Z",
+  "timestamp": "2025-12-05T13:50:19.057Z",
   "steps": {
     "10.1": {
       "success": true,
       "data": {
-        "patientId": "6af5c335-5849-4a05-97dc-48337b798b35",
+        "patientId": "f7a671fa-2b0c-4d2b-8459-2de4614920cc",
         "patientName": "Matti Virtanen",
-        "visitId": "bc723dca-427a-49f2-8a70-4b03b8ec1c7c",
+        "visitId": "7513d4ba-d045-417d-a38a-dcf924da55bf",
         "nurseId": "staff-1001",
         "nurseName": "Anna Virtanen",
         "primaryCaregiverId": "staff-1003",
         "primaryCaregiverName": "Jukka Mäkinen",
-        "testSessionId": "step10-test-1764795191980"
+        "testSessionId": "step10-test-1764942619205"
       }
     },
     "10.2": {
       "success": true,
       "data": {
         "audio": {
-          "uploadUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/audio_recordings/bc723dca-427a-49f2-8a70-4b03b8ec1c7c/visit_audio_20251203_225312.m4a?Content-Type=audio%2Fmp4&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAV76ZJRZPKOIO3ZFJ%2F20251203%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20251203T205312Z&X-Amz-Expires=300&X-Amz-Signature=1021f17d5006ff6c974545b13fa9aa6a376d4170db4653106ca0b01856699361&X-Amz-SignedHeaders=host%3Bx-amz-acl&x-amz-acl=private",
-          "fileUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/audio_recordings/bc723dca-427a-49f2-8a70-4b03b8ec1c7c/visit_audio_20251203_225312.m4a",
-          "s3Key": "audio_recordings/bc723dca-427a-49f2-8a70-4b03b8ec1c7c/visit_audio_20251203_225312.m4a",
-          "expires": "2025-12-03T20:58:12.278Z",
-          "dataId": "6930a338ab32314025cf77e9",
+          "uploadUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/audio_recordings/7513d4ba-d045-417d-a38a-dcf924da55bf/visit_audio_20251205_155019.m4a?Content-Type=audio%2Fmpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAV76ZJRZPKOIO3ZFJ%2F20251205%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20251205T135019Z&X-Amz-Expires=300&X-Amz-Signature=dba27311522eb4e400d8a4d5f6eefb4cb7c76fc98088f8db59fda00a3fc53def&X-Amz-SignedHeaders=host%3Bx-amz-acl&x-amz-acl=private",
+          "fileUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/audio_recordings/7513d4ba-d045-417d-a38a-dcf924da55bf/visit_audio_20251205_155019.m4a",
+          "s3Key": "audio_recordings/7513d4ba-d045-417d-a38a-dcf924da55bf/visit_audio_20251205_155019.m4a",
+          "expires": "2025-12-05T13:55:19.302Z",
+          "dataId": "6932e31b6a96ebbaee29ca89",
           "type": "audio"
         },
         "photo": {
-          "uploadUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/photos/bc723dca-427a-49f2-8a70-4b03b8ec1c7c/visit_photo_20251203_225312.jpg?Content-Type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAV76ZJRZPKOIO3ZFJ%2F20251203%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20251203T205312Z&X-Amz-Expires=300&X-Amz-Signature=23b6820a74a776a68d242dc9adb0cea6c6f7bfa9b305351bb4a9dec98cf18df1&X-Amz-SignedHeaders=host%3Bx-amz-acl&x-amz-acl=private",
-          "fileUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/photos/bc723dca-427a-49f2-8a70-4b03b8ec1c7c/visit_photo_20251203_225312.jpg",
-          "s3Key": "photos/bc723dca-427a-49f2-8a70-4b03b8ec1c7c/visit_photo_20251203_225312.jpg",
-          "expires": "2025-12-03T20:58:12.374Z",
-          "dataId": "6930a338ab32314025cf77eb",
+          "uploadUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/photos/7513d4ba-d045-417d-a38a-dcf924da55bf/visit_photo_20251205_155019.jpg?Content-Type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAV76ZJRZPKOIO3ZFJ%2F20251205%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20251205T135019Z&X-Amz-Expires=300&X-Amz-Signature=cc823c2dc2dc179cd804f10d9533f7742f43fd4ccfed42eec333077e14c7cfca&X-Amz-SignedHeaders=host%3Bx-amz-acl&x-amz-acl=private",
+          "fileUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/photos/7513d4ba-d045-417d-a38a-dcf924da55bf/visit_photo_20251205_155019.jpg",
+          "s3Key": "photos/7513d4ba-d045-417d-a38a-dcf924da55bf/visit_photo_20251205_155019.jpg",
+          "expires": "2025-12-05T13:55:19.353Z",
+          "dataId": "6932e31b6a96ebbaee29ca8b",
           "type": "photo"
         }
       }
@@ -40,13 +40,13 @@
       "success": true,
       "data": {
         "audio": {
-          "s3Key": "audio_recordings/bc723dca-427a-49f2-8a70-4b03b8ec1c7c/visit_audio_20251203_225312.m4a",
+          "s3Key": "audio_recordings/7513d4ba-d045-417d-a38a-dcf924da55bf/visit_audio_20251205_155019.m4a",
           "fileSize": 209430,
           "uploadedBy": "staff-1001",
           "verifiedInS3": true
         },
         "photo": {
-          "s3Key": "photos/bc723dca-427a-49f2-8a70-4b03b8ec1c7c/visit_photo_20251203_225312.jpg",
+          "s3Key": "photos/7513d4ba-d045-417d-a38a-dcf924da55bf/visit_photo_20251205_155019.jpg",
           "fileSize": 222897,
           "uploadedBy": "staff-1001",
           "verifiedInS3": true
