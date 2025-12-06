@@ -98,6 +98,10 @@ const fs = require('fs');
 let oracledb;
 try {
   oracledb = require('oracledb');
+  // Initialize Oracle Instant Client on Linux/EC2
+  if (process.platform === 'linux' && fs.existsSync('/opt/oracle/instantclient_23_4')) {
+    oracledb.initOracleClient({ libDir: '/opt/oracle/instantclient_23_4' });
+  }
 } catch (error) {
   // Oracle driver not available - will use fallback data
 }
