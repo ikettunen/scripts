@@ -102,9 +102,8 @@ try {
   // Oracle driver not available - will use fallback data
 }
 
-// Load environment variables from service folders
-require('dotenv').config({ path: path.join(__dirname, '..', 'fhir-api-backend', '.env') });
-require('dotenv').config({ path: path.join(__dirname, '..', 'visits-service', '.env') });
+// Load environment variables from scripts/.env file
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 // ============================================================================
 // CONFIGURATION

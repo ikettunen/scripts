@@ -5,20 +5,58 @@ Scripts for resetting all databases to a known state for testing and development
 
 ---
 
+## 🔧 Environment Configuration
+
+### Local Development
+
+1. **Copy and configure .env file:**
+   ```bash
+   cd scripts
+   cp .env.production .env
+   # Edit .env with your local database credentials
+   ```
+
+2. **Update database settings in .env:**
+   ```bash
+   DB_HOST=localhost
+   DB_PASSWORD=your_local_password
+   MONGODB_URI=mongodb://localhost:27017/nursing_home_visits
+   NODE_ENV=development
+   ```
+
+### Cloud Deployment (EC2)
+
+Scripts are automatically deployed via GitHub Actions:
+- Workflow: `.github/workflows/deploy-ec2.yml`
+- Triggers on push to main branch
+- Copies `.env.production` to `.env` on EC2
+- Deployed to: `~/scripts/` on EC2 instance
+
+**Manual deployment on EC2:**
+```bash
+cd ~/scripts
+# Edit .env.production with production credentials
+cp .env.production .env
+```
+
+---
+
 ## Quick Start
 
-### From Project Root:
+### From Project Root (Local):
 ```bash
 # Install dependencies (first time only)
 npm install
 
 # Run the reset script
-npm run reset-data
+cd scripts
+node reset-all-data.js
 ```
 
-### Direct Execution:
+### On EC2 (Cloud):
 ```bash
-node scripts/reset-all-data.js
+cd ~/scripts
+node reset-all-data.js
 ```
 
 ---

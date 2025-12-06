@@ -1,0 +1,30 @@
+{
+  "name": "nursing-home-scripts",
+  "version": "1.0.0",
+  "description": "Data management scripts for Nursing Home Management System",
+  "main": "reset-all-data.js",
+  "scripts": {
+    "reset": "node reset-all-data.js",
+    "test-visits": "node test-visit-states.js",
+    "test-upload": "node step-10-upload-workflow.js"
+  },
+  "keywords": [
+    "database",
+    "seed",
+    "reset",
+    "testing"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "mysql2": "^3.0.0",
+    "mongoose": "^7.0.0"
+  },
+  "optionalDependencies": {
+    "oracledb": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

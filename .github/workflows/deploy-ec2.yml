@@ -1,0 +1,79 @@
+# Scripts deployment workflow for EC2 self-hosted runner
+# Deploys scripts folder to EC2 for data management
+
+name: Deploy Scripts to EC2
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'scripts/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Setup Node.js 22
+      uses: actions/setup-node@v3
+      with:
+        node-version: '22.x'
+    
+    - name: Verify Node.js version
+      run: |
+        node --version
+        npm --version
+    
+    - name: Deploy scripts to EC2
+      run: |
+        # Backup current version
+        if [ -d ~/scripts ]; then
+          cp -r ~/scripts ~/scripts.backup
+        fi
+        
+        # Copy new files (excluding .git and test files)
+        rsync -av --exclude='.git' --exclude='test-*.json' --exclude='*_export.json' --exclude='*.log' ./scripts/ ~/scripts/
+        
+        # Navigate to scripts directory
+        cd ~/scripts
+        
+        # Copy production environment as .env
+        cp .env.production .env
+        
+        # Add deployment timestamp
+        {
+          echo ""
+          echo "# Last deployed: $(date -u +'%Y-%m-%d %H:%M:%S UTC') via GitHub Actions"
+          echo "# Deployment ID: $GITHUB_RUN_ID"
+          echo "# Commit SHA: $GITHUB_SHA"
+          echo "# Commit Message: $(git log -1 --pretty=format:'%s' $GITHUB_SHA 2>/dev/null || echo 'No commit message available')"
+        } >> .env
+        
+        echo "Deployed to ~/scripts"
+    
+    - name: Verify deployment
+      run: |
+        cd ~/scripts
+        echo "✅ Scripts deployed successfully!"
+        echo "📁 Deployed to: ~/scripts"
+        echo ""
+        echo "Available scripts:"
+        ls -lh *.js | grep -E "(reset-all-data|test-visit-states|step-10)" || echo "Main scripts found"
+        echo ""
+        echo "Environment configuration:"
+        echo "NODE_ENV=$(grep NODE_ENV .env | cut -d'=' -f2)"
+        echo "CLOUD_DEPLOYMENT=$(grep CLOUD_DEPLOYMENT .env | cut -d'=' -f2)"
+    
+    - name: Deployment Summary
+      run: |
+        echo ""
+        echo "🎯 To run data reset on EC2:"
+        echo "   cd ~/scripts"
+        echo "   node reset-all-data.js"
+        echo ""
+        echo "📝 Environment file: ~/scripts/.env"
+        echo "🔧 Update database passwords in .env if needed"

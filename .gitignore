@@ -1,0 +1,17 @@
+# Environment files
+.env
+.env.local
+.env.production.local
+
+# Keep .env.production for deployment
+!.env.production
+
+# Logs
+*.log
+
+# Test data
+test-*.json
+*_export.json
+
+# Temporary files
+temp_*.sql
