@@ -36,7 +36,8 @@ jobs:
         fi
         
         # Copy new files (excluding .git and test files)
-        rsync -av --exclude='.git' --exclude='test-*.json' --exclude='*_export.json' --exclude='*.log' ./scripts/ ~/scripts/
+        # Note: We're already in the scripts directory, so copy from current directory
+        rsync -av --exclude='.git' --exclude='test-*.json' --exclude='*_export.json' --exclude='*.log' ./ ~/scripts/
         
         # Navigate to scripts directory
         cd ~/scripts
