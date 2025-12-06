@@ -105,6 +105,14 @@ try {
 // Load environment variables from scripts/.env file
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 
+// AWS SDK for Lambda invocation (optional - only needed in cloud)
+let AWS;
+try {
+  AWS = require('aws-sdk');
+} catch (error) {
+  // AWS SDK not available - will use local execution
+}
+
 // ============================================================================
 // CONFIGURATION
 // ============================================================================
@@ -125,8 +133,68 @@ const CONFIG = {
     user: process.env.ORACLE_USER || 'C##HRAPP1',
     password: process.env.ORACLE_PASSWORD || 'hrapp123',
     connectString: process.env.ORACLE_CONNECT_STRING || 'localhost:1521/XE'
+  },
+  lambda: {
+    useLambda: process.env.USE_LAMBDA === 'true',
+    region: process.env.AWS_REGION || 'eu-north-1',
+    carePlanScheduler: process.env.CARE_PLAN_SCHEDULER_LAMBDA || 'care-plan-scheduler',
+    s3UploadNotifier: process.env.S3_UPLOAD_NOTIFIER_LAMBDA || 's3-upload-notifier'
   }
 };
+
+// ============================================================================
+// LAMBDA INVOCATION UTILITIES
+// ============================================================================
+
+/**
+ * Invoke AWS Lambda function or run locally based on configuration
+ */
+async function invokeLambdaOrLocal(functionName, localScriptPath, payload = {}) {
+  if (CONFIG.lambda.useLambda && AWS) {
+    // Cloud mode: Invoke AWS Lambda
+    logProgress(`Invoking Lambda function: ${functionName}`);
+    
+    try {
+      const lambda = new AWS.Lambda({ region: CONFIG.lambda.region });
+      
+      const params = {
+        FunctionName: functionName,
+        InvocationType: 'RequestResponse',
+        Payload: JSON.stringify(payload)
+      };
+      
+      const result = await lambda.invoke(params).promise();
+      
+      if (result.FunctionError) {
+        throw new Error(`Lambda error: ${result.FunctionError}`);
+      }
+      
+      const response = JSON.parse(result.Payload);
+      logProgress(`Lambda response: ${result.StatusCode}`);
+      
+      return response;
+    } catch (error) {
+      logError(`Lambda invocation failed: ${error.message}`);
+      throw error;
+    }
+  } else {
+    // Local mode: Run Node.js script
+    logProgress(`Running local script: ${localScriptPath}`);
+    
+    try {
+      const output = execSync(`node ${localScriptPath}`, {
+        encoding: 'utf8',
+        stdio: 'pipe',
+        env: { ...process.env, MONGODB_URI: CONFIG.mongodb.uri }
+      });
+      
+      return { output };
+    } catch (error) {
+      logError(`Local script execution failed: ${error.message}`);
+      throw error;
+    }
+  }
+}
 
 // ============================================================================
 // LOGGING UTILITIES
@@ -1000,30 +1068,48 @@ async function runCarePlanScheduler() {
   logStep(7, 'RUNNING CARE-PLAN-SCHEDULER');
   
   try {
-    logProgress('Looking for care-plan-scheduler...');
-    
     const schedulerPath = path.join(__dirname, '..', 'lambda-functions', 'care-plan-scheduler', 'index.js');
     
-    // Check if scheduler exists
-    if (!fs.existsSync(schedulerPath)) {
+    // Check if local script exists (needed for local mode)
+    if (!CONFIG.lambda.useLambda && !fs.existsSync(schedulerPath)) {
       logWarning('Care-plan-scheduler not found');
       logInfo('Location checked: lambda-functions/care-plan-scheduler/index.js');
       logInfo('Skipping visit generation - scheduler needs to be created');
       return;
     }
     
-    // Run scheduler
-    logProgress('  - Executing care-plan-scheduler...');
-    const output = execSync(`node ${schedulerPath}`, {
-      encoding: 'utf8',
-      stdio: 'pipe',
-      env: { ...process.env, MONGODB_URI: CONFIG.mongodb.uri }
-    });
+    // Determine execution mode
+    if (CONFIG.lambda.useLambda) {
+      logInfo('🚀 Cloud mode: Invoking AWS Lambda function');
+      logProgress(`Function: ${CONFIG.lambda.carePlanScheduler}`);
+      logProgress(`Region: ${CONFIG.lambda.region}`);
+    } else {
+      logInfo('💻 Local mode: Running Node.js script');
+      logProgress(`Script: ${schedulerPath}`);
+    }
+    
+    // Execute scheduler (Lambda or local)
+    const result = await invokeLambdaOrLocal(
+      CONFIG.lambda.carePlanScheduler,
+      schedulerPath,
+      { source: 'reset-all-data-script' }
+    );
     
     // Parse output
-    logProgress('  - Scheduler output:');
-    const lines = output.split('\n').filter(line => line.trim());
-    lines.forEach(line => logProgress(`    ${line}`));
+    if (CONFIG.lambda.useLambda) {
+      logProgress('Lambda response:');
+      logProgress(`  Status: ${result.statusCode || 'N/A'}`);
+      if (result.body) {
+        const body = typeof result.body === 'string' ? JSON.parse(result.body) : result.body;
+        logProgress(`  Care Plans Processed: ${body.carePlansProcessed || 'N/A'}`);
+        logProgress(`  Visits Created: ${body.visitsCreated || 'N/A'}`);
+        logProgress(`  Visits Skipped: ${body.visitsSkipped || 'N/A'}`);
+      }
+    } else {
+      logProgress('Local execution output:');
+      const lines = result.output.split('\n').filter(line => line.trim());
+      lines.slice(-10).forEach(line => logProgress(`  ${line}`));
+    }
     
     logSuccess('Step 7 completed: Visits generated from care plans');
     

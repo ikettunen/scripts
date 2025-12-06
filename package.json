@@ -22,7 +22,8 @@
     "mongoose": "^7.0.0"
   },
   "optionalDependencies": {
-    "oracledb": "^6.0.0"
+    "oracledb": "^6.0.0",
+    "aws-sdk": "^2.1000.0"
   },
   "engines": {
     "node": ">=18.0.0"

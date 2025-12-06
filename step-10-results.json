@@ -1,37 +1,37 @@
 {
-  "success": false,
-  "timestamp": "2025-12-05T13:50:19.057Z",
+  "success": true,
+  "timestamp": "2025-12-06T10:04:30.308Z",
   "steps": {
     "10.1": {
       "success": true,
       "data": {
-        "patientId": "f7a671fa-2b0c-4d2b-8459-2de4614920cc",
+        "patientId": "a8b1c215-a4ee-43e6-8d21-29135f362ac0",
         "patientName": "Matti Virtanen",
-        "visitId": "7513d4ba-d045-417d-a38a-dcf924da55bf",
+        "visitId": "aa1df72d-1ada-4cb0-88b8-f28245dd3189",
         "nurseId": "staff-1001",
         "nurseName": "Anna Virtanen",
         "primaryCaregiverId": "staff-1003",
         "primaryCaregiverName": "Jukka Mäkinen",
-        "testSessionId": "step10-test-1764942619205"
+        "testSessionId": "step10-test-1765015470429"
       }
     },
     "10.2": {
       "success": true,
       "data": {
         "audio": {
-          "uploadUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/audio_recordings/7513d4ba-d045-417d-a38a-dcf924da55bf/visit_audio_20251205_155019.m4a?Content-Type=audio%2Fmpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAV76ZJRZPKOIO3ZFJ%2F20251205%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20251205T135019Z&X-Amz-Expires=300&X-Amz-Signature=dba27311522eb4e400d8a4d5f6eefb4cb7c76fc98088f8db59fda00a3fc53def&X-Amz-SignedHeaders=host%3Bx-amz-acl&x-amz-acl=private",
-          "fileUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/audio_recordings/7513d4ba-d045-417d-a38a-dcf924da55bf/visit_audio_20251205_155019.m4a",
-          "s3Key": "audio_recordings/7513d4ba-d045-417d-a38a-dcf924da55bf/visit_audio_20251205_155019.m4a",
-          "expires": "2025-12-05T13:55:19.302Z",
-          "dataId": "6932e31b6a96ebbaee29ca89",
+          "uploadUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/audio_recordings/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_audio_20251206_120430.m4a?Content-Type=audio%2Fmpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAV76ZJRZPKOIO3ZFJ%2F20251206%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20251206T100430Z&X-Amz-Expires=300&X-Amz-Signature=749ba4c3aeba5ac86b7d5cbbb0b0bbc22d6315e41cc6e7956f08158f10e3586b&X-Amz-SignedHeaders=host%3Bx-amz-acl&x-amz-acl=private",
+          "fileUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/audio_recordings/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_audio_20251206_120430.m4a",
+          "s3Key": "audio_recordings/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_audio_20251206_120430.m4a",
+          "expires": "2025-12-06T10:09:30.565Z",
+          "dataId": "6933ffae6a96ebbaee29caa5",
           "type": "audio"
         },
         "photo": {
-          "uploadUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/photos/7513d4ba-d045-417d-a38a-dcf924da55bf/visit_photo_20251205_155019.jpg?Content-Type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAV76ZJRZPKOIO3ZFJ%2F20251205%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20251205T135019Z&X-Amz-Expires=300&X-Amz-Signature=cc823c2dc2dc179cd804f10d9533f7742f43fd4ccfed42eec333077e14c7cfca&X-Amz-SignedHeaders=host%3Bx-amz-acl&x-amz-acl=private",
-          "fileUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/photos/7513d4ba-d045-417d-a38a-dcf924da55bf/visit_photo_20251205_155019.jpg",
-          "s3Key": "photos/7513d4ba-d045-417d-a38a-dcf924da55bf/visit_photo_20251205_155019.jpg",
-          "expires": "2025-12-05T13:55:19.353Z",
-          "dataId": "6932e31b6a96ebbaee29ca8b",
+          "uploadUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/photos/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_photo_20251206_120430.jpg?Content-Type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAV76ZJRZPKOIO3ZFJ%2F20251206%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20251206T100430Z&X-Amz-Expires=300&X-Amz-Signature=d9d93b13cabe274f68222c5b56a8f34cdcb70d20c98abb922a86e1a4e019f722&X-Amz-SignedHeaders=host%3Bx-amz-acl&x-amz-acl=private",
+          "fileUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/photos/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_photo_20251206_120430.jpg",
+          "s3Key": "photos/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_photo_20251206_120430.jpg",
+          "expires": "2025-12-06T10:09:30.605Z",
+          "dataId": "6933ffae6a96ebbaee29caa7",
           "type": "photo"
         }
       }
@@ -40,24 +40,231 @@
       "success": true,
       "data": {
         "audio": {
-          "s3Key": "audio_recordings/7513d4ba-d045-417d-a38a-dcf924da55bf/visit_audio_20251205_155019.m4a",
+          "s3Key": "audio_recordings/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_audio_20251206_120430.m4a",
           "fileSize": 209430,
           "uploadedBy": "staff-1001",
           "verifiedInS3": true
         },
         "photo": {
-          "s3Key": "photos/7513d4ba-d045-417d-a38a-dcf924da55bf/visit_photo_20251205_155019.jpg",
+          "s3Key": "photos/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_photo_20251206_120430.jpg",
           "fileSize": 222897,
           "uploadedBy": "staff-1001",
           "verifiedInS3": true
         }
       }
+    },
+    "10.4": {
+      "success": true,
+      "data": {
+        "audio": {
+          "dataId": "6933ffae6a96ebbaee29caa5",
+          "fileUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/audio_recordings/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_audio_20251206_120430.m4a",
+          "type": "audio",
+          "message": "Upload confirmed successfully"
+        },
+        "photo": {
+          "dataId": "6933ffae6a96ebbaee29caa7",
+          "fileUrl": "https://nursing-home-audio-recordings-20251124.s3.eu-north-1.amazonaws.com/photos/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_photo_20251206_120430.jpg",
+          "type": "photo",
+          "message": "Upload confirmed successfully"
+        }
+      }
+    },
+    "10.5": {
+      "success": true,
+      "data": {
+        "audio": {
+          "statusCode": 200,
+          "body": "{\"message\":\"S3 upload notifications processed\",\"results\":[{\"objectKey\":\"audio_recordings/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_audio_20251206_120430.m4a\",\"fileType\":\"audio\",\"recipientId\":\"staff-1001\",\"recipientType\":\"uploader\",\"status\":\"success\",\"response\":{\"statusCode\":201,\"body\":\"{\\\"success\\\":true,\\\"notification\\\":{\\\"id\\\":\\\"a2f80ea5-1fc3-49bb-9abf-9c988a4dba26\\\",\\\"type\\\":\\\"audio_upload\\\",\\\"entityType\\\":\\\"audio\\\",\\\"entityId\\\":\\\"audio-upload-1765015476603-eq9i01svj\\\",\\\"title\\\":\\\"Audio Recording Uploaded\\\",\\\"message\\\":\\\"Your audio recording has been uploaded. Please review and add notes to the visit.\\\",\\\"priority\\\":\\\"normal\\\",\\\"recipients\\\":[\\\"staff-1001\\\"],\\\"metadata\\\":{\\\"fileType\\\":\\\"audio\\\",\\\"filename\\\":\\\"visit_audio_20251206_120430.m4a\\\",\\\"fileSize\\\":209430,\\\"s3Url\\\":\\\"https://nursing-home-audio-recordings.s3.eu-north-1.amazonaws.com/audio_recordings/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_audio_20251206_120430.m4a\\\",\\\"bucketName\\\":\\\"nursing-home-audio-recordings\\\",\\\"objectKey\\\":\\\"audio_recordings/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_audio_20251206_120430.m4a\\\",\\\"uploaderId\\\":\\\"staff-1001\\\",\\\"recipientType\\\":\\\"uploader\\\",\\\"uploadedAt\\\":\\\"2025-12-06T10:04:36.378Z\\\",\\\"visitId\\\":\\\"aa1df72d-1ada-4cb0-88b8-f28245dd3189\\\",\\\"patientId\\\":\\\"a8b1c215-a4ee-43e6-8d21-29135f362ac0\\\",\\\"actionRequired\\\":true,\\\"actionUrl\\\":\\\"/visits/aa1df72d-1ada-4cb0-88b8-f28245dd3189\\\",\\\"actionLabel\\\":\\\"Add Notes\\\",\\\"requiresTranscription\\\":true,\\\"requiresReview\\\":false,\\\"notificationCategory\\\":\\\"file_processing\\\"},\\\"timestamp\\\":\\\"2025-12-06T10:04:36.767Z\\\",\\\"status\\\":\\\"sent\\\"},\\\"sns\\\":{\\\"success\\\":true,\\\"messageId\\\":\\\"local-dev-mock\\\"},\\\"sqs\\\":{\\\"success\\\":true,\\\"messageId\\\":\\\"local-dev-mock\\\"}}\",\"data\":{\"success\":true,\"notification\":{\"id\":\"a2f80ea5-1fc3-49bb-9abf-9c988a4dba26\",\"type\":\"audio_upload\",\"entityType\":\"audio\",\"entityId\":\"audio-upload-1765015476603-eq9i01svj\",\"title\":\"Audio Recording Uploaded\",\"message\":\"Your audio recording has been uploaded. Please review and add notes to the visit.\",\"priority\":\"normal\",\"recipients\":[\"staff-1001\"],\"metadata\":{\"fileType\":\"audio\",\"filename\":\"visit_audio_20251206_120430.m4a\",\"fileSize\":209430,\"s3Url\":\"https://nursing-home-audio-recordings.s3.eu-north-1.amazonaws.com/audio_recordings/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_audio_20251206_120430.m4a\",\"bucketName\":\"nursing-home-audio-recordings\",\"objectKey\":\"audio_recordings/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_audio_20251206_120430.m4a\",\"uploaderId\":\"staff-1001\",\"recipientType\":\"uploader\",\"uploadedAt\":\"2025-12-06T10:04:36.378Z\",\"visitId\":\"aa1df72d-1ada-4cb0-88b8-f28245dd3189\",\"patientId\":\"a8b1c215-a4ee-43e6-8d21-29135f362ac0\",\"actionRequired\":true,\"actionUrl\":\"/visits/aa1df72d-1ada-4cb0-88b8-f28245dd3189\",\"actionLabel\":\"Add Notes\",\"requiresTranscription\":true,\"requiresReview\":false,\"notificationCategory\":\"file_processing\"},\"timestamp\":\"2025-12-06T10:04:36.767Z\",\"status\":\"sent\"},\"sns\":{\"success\":true,\"messageId\":\"local-dev-mock\"},\"sqs\":{\"success\":true,\"messageId\":\"local-dev-mock\"}}}}]}"
+        },
+        "photo": {
+          "statusCode": 200,
+          "body": "{\"message\":\"S3 upload notifications processed\",\"results\":[{\"objectKey\":\"photos/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_photo_20251206_120430.jpg\",\"fileType\":\"photo\",\"recipientId\":\"staff-1001\",\"recipientType\":\"uploader\",\"status\":\"success\",\"response\":{\"statusCode\":201,\"body\":\"{\\\"success\\\":true,\\\"notification\\\":{\\\"id\\\":\\\"d6dfc969-e391-4867-9d56-969ddd55c455\\\",\\\"type\\\":\\\"photo_upload\\\",\\\"entityType\\\":\\\"photo\\\",\\\"entityId\\\":\\\"photo-upload-1765015476867-61utoe23m\\\",\\\"title\\\":\\\"Photo Uploaded\\\",\\\"message\\\":\\\"Your photo has been uploaded successfully.\\\",\\\"priority\\\":\\\"normal\\\",\\\"recipients\\\":[\\\"staff-1001\\\"],\\\"metadata\\\":{\\\"fileType\\\":\\\"photo\\\",\\\"filename\\\":\\\"visit_photo_20251206_120430.jpg\\\",\\\"fileSize\\\":222897,\\\"s3Url\\\":\\\"https://nursing-home-photos.s3.eu-north-1.amazonaws.com/photos/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_photo_20251206_120430.jpg\\\",\\\"bucketName\\\":\\\"nursing-home-photos\\\",\\\"objectKey\\\":\\\"photos/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_photo_20251206_120430.jpg\\\",\\\"uploaderId\\\":\\\"staff-1001\\\",\\\"recipientType\\\":\\\"uploader\\\",\\\"uploadedAt\\\":\\\"2025-12-06T10:04:36.378Z\\\",\\\"visitId\\\":\\\"aa1df72d-1ada-4cb0-88b8-f28245dd3189\\\",\\\"patientId\\\":\\\"a8b1c215-a4ee-43e6-8d21-29135f362ac0\\\",\\\"actionRequired\\\":false,\\\"actionUrl\\\":\\\"/visits/aa1df72d-1ada-4cb0-88b8-f28245dd3189\\\",\\\"actionLabel\\\":\\\"View File\\\",\\\"requiresTranscription\\\":false,\\\"requiresReview\\\":true,\\\"notificationCategory\\\":\\\"file_review\\\"},\\\"timestamp\\\":\\\"2025-12-06T10:04:36.948Z\\\",\\\"status\\\":\\\"sent\\\"},\\\"sns\\\":{\\\"success\\\":true,\\\"messageId\\\":\\\"local-dev-mock\\\"},\\\"sqs\\\":{\\\"success\\\":true,\\\"messageId\\\":\\\"local-dev-mock\\\"}}\",\"data\":{\"success\":true,\"notification\":{\"id\":\"d6dfc969-e391-4867-9d56-969ddd55c455\",\"type\":\"photo_upload\",\"entityType\":\"photo\",\"entityId\":\"photo-upload-1765015476867-61utoe23m\",\"title\":\"Photo Uploaded\",\"message\":\"Your photo has been uploaded successfully.\",\"priority\":\"normal\",\"recipients\":[\"staff-1001\"],\"metadata\":{\"fileType\":\"photo\",\"filename\":\"visit_photo_20251206_120430.jpg\",\"fileSize\":222897,\"s3Url\":\"https://nursing-home-photos.s3.eu-north-1.amazonaws.com/photos/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_photo_20251206_120430.jpg\",\"bucketName\":\"nursing-home-photos\",\"objectKey\":\"photos/aa1df72d-1ada-4cb0-88b8-f28245dd3189/visit_photo_20251206_120430.jpg\",\"uploaderId\":\"staff-1001\",\"recipientType\":\"uploader\",\"uploadedAt\":\"2025-12-06T10:04:36.378Z\",\"visitId\":\"aa1df72d-1ada-4cb0-88b8-f28245dd3189\",\"patientId\":\"a8b1c215-a4ee-43e6-8d21-29135f362ac0\",\"actionRequired\":false,\"actionUrl\":\"/visits/aa1df72d-1ada-4cb0-88b8-f28245dd3189\",\"actionLabel\":\"View File\",\"requiresTranscription\":false,\"requiresReview\":true,\"notificationCategory\":\"file_review\"},\"timestamp\":\"2025-12-06T10:04:36.948Z\",\"status\":\"sent\"},\"sns\":{\"success\":true,\"messageId\":\"local-dev-mock\"},\"sqs\":{\"success\":true,\"messageId\":\"local-dev-mock\"}}}}]}"
+        }
+      }
+    },
+    "10.6": {
+      "success": true,
+      "data": {
+        "created": {
+          "success": true,
+          "notification": {
+            "id": "4e370bc2-748d-4f97-a50b-ed3f6e03d8e1",
+            "type": "file_upload",
+            "entityType": "audio",
+            "entityId": "test-file-key",
+            "title": "Test File Upload Notification",
+            "message": "This is a test notification from Step 10 workflow",
+            "priority": "normal",
+            "recipients": [
+              "staff-1001"
+            ],
+            "metadata": {
+              "fileType": "audio",
+              "filename": "test-recording.wav",
+              "uploaderId": "staff-1001",
+              "uploadedAt": "2025-12-06T10:04:36.950Z",
+              "visitId": "aa1df72d-1ada-4cb0-88b8-f28245dd3189",
+              "patientId": "a8b1c215-a4ee-43e6-8d21-29135f362ac0"
+            },
+            "timestamp": "2025-12-06T10:04:36.952Z",
+            "status": "sent"
+          },
+          "sns": {
+            "success": true,
+            "messageId": "local-dev-mock"
+          },
+          "sqs": {
+            "success": true,
+            "messageId": "local-dev-mock"
+          }
+        },
+        "retrieved": {
+          "success": true,
+          "count": 2,
+          "data": [
+            {
+              "id": "notif-1",
+              "type": "task",
+              "entityType": "task",
+              "entityId": "task-123",
+              "title": "Medication Round Due",
+              "message": "Morning medication round for Room 101-105 is due in 15 minutes",
+              "priority": "high",
+              "recipients": [
+                "staff-1001"
+              ],
+              "read": false,
+              "createdAt": "2025-12-06T09:49:36.955Z",
+              "metadata": {
+                "room": "101-105",
+                "round": "morning"
+              }
+            },
+            {
+              "id": "notif-2",
+              "type": "alarm",
+              "entityType": "alarm",
+              "entityId": "alarm-456",
+              "title": "Patient Call Button",
+              "message": "Patient in Room 108 has pressed the call button",
+              "priority": "urgent",
+              "recipients": [
+                "staff-1001"
+              ],
+              "read": false,
+              "createdAt": "2025-12-06T09:59:36.955Z",
+              "metadata": {
+                "room": "108",
+                "patient": "Liisa Heikkinen"
+              }
+            }
+          ]
+        },
+        "caregiverRetrieved": {
+          "success": true,
+          "count": 2,
+          "data": [
+            {
+              "id": "notif-1",
+              "type": "task",
+              "entityType": "task",
+              "entityId": "task-123",
+              "title": "Medication Round Due",
+              "message": "Morning medication round for Room 101-105 is due in 15 minutes",
+              "priority": "high",
+              "recipients": [
+                "staff-1003"
+              ],
+              "read": false,
+              "createdAt": "2025-12-06T09:49:36.957Z",
+              "metadata": {
+                "room": "101-105",
+                "round": "morning"
+              }
+            },
+            {
+              "id": "notif-2",
+              "type": "alarm",
+              "entityType": "alarm",
+              "entityId": "alarm-456",
+              "title": "Patient Call Button",
+              "message": "Patient in Room 108 has pressed the call button",
+              "priority": "urgent",
+              "recipients": [
+                "staff-1003"
+              ],
+              "read": false,
+              "createdAt": "2025-12-06T09:59:36.957Z",
+              "metadata": {
+                "room": "108",
+                "patient": "Liisa Heikkinen"
+              }
+            }
+          ]
+        },
+        "unreadCount": {
+          "success": true,
+          "recipientId": "staff-1001",
+          "unreadCount": 2
+        },
+        "caregiverUnreadCount": {
+          "success": true,
+          "recipientId": "staff-1003",
+          "unreadCount": 3
+        }
+      }
+    },
+    "10.7": {
+      "success": true,
+      "data": {
+        "soundDataCount": 1,
+        "noteAdded": {
+          "message": "Note added to visit successfully",
+          "data": {
+            "visitId": "aa1df72d-1ada-4cb0-88b8-f28245dd3189",
+            "noteAdded": "[2025-12-06T10:04:36.973Z] Anna Virtanen (workflow_test): Step 10 workflow test completed successfully. Audio and photo files uploaded and processed.",
+            "totalNotes": "Scheduled from care plan - Medication Round\n\n[2025-12-06T10:04:36.973Z] Anna Virtanen (workflow_test): Step 10 workflow test completed successfully. Audio and photo files uploaded and processed.",
+            "visit": {
+              "id": "aa1df72d-1ada-4cb0-88b8-f28245dd3189",
+              "patient_id": "a8b1c215-a4ee-43e6-8d21-29135f362ac0",
+              "patient_name": "Matti Virtanen",
+              "nurse_id": "staff-1001",
+              "nurse_name": "Anna Virtanen",
+              "scheduled_time": "2025-12-13T16:00:00.000Z",
+              "start_time": null,
+              "end_time": null,
+              "status": "planned",
+              "location": null,
+              "notes": "Scheduled from care plan - Medication Round\n\n[2025-12-06T10:04:36.973Z] Anna Virtanen (workflow_test): Step 10 workflow test completed successfully. Audio and photo files uploaded and processed.",
+              "created_at": "2025-12-06T10:04:28.000Z",
+              "updated_at": "2025-12-06T10:04:36.000Z",
+              "fhir_id": "encounter-aa1df72d-1ada-4cb0-88b8-f28245dd3189",
+              "has_audio_recording": false,
+              "vitalSigns": null,
+              "photos": [],
+              "taskCompletions": [],
+              "syncStatus": "synced",
+              "completionStats": null,
+              "flexibleData": {
+                "vitalSigns": null,
+                "photos": [],
+                "syncStatus": "synced"
+              }
+            }
+          }
+        }
+      }
+    },
+    "10.8": {
+      "success": true,
+      "data": {
+        "prepared": true,
+        "sessionId": "step10-test-1765015470429",
+        "cleanupCommand": "node scripts/cleanup-test-files.js step10-test-1765015470429",
+        "filesPreserved": "for next workflow steps"
+      }
     }
   },
-  "errors": [
-    {
-      "message": "read ECONNRESET",
-      "stack": "Error: read ECONNRESET\n    at AxiosError.from (C:\\Users\\ikett\\Kouluprojekti\\node_modules\\axios\\dist\\node\\axios.cjs:914:14)\n    at RedirectableRequest.handleRequestError (C:\\Users\\ikett\\Kouluprojekti\\node_modules\\axios\\dist\\node\\axios.cjs:3515:25)\n    at RedirectableRequest.emit (node:events:531:35)\n    at eventHandlers.<computed> (C:\\Users\\ikett\\Kouluprojekti\\node_modules\\follow-redirects\\index.js:49:24)\n    at ClientRequest.emit (node:events:519:28)\n    at emitErrorEvent (node:_http_client:105:11)\n    at Socket.socketErrorListener (node:_http_client:518:5)\n    at Socket.emit (node:events:519:28)\n    at emitErrorNT (node:internal/streams/destroy:170:8)\n    at emitErrorCloseNT (node:internal/streams/destroy:129:3)\n    at Axios.request (C:\\Users\\ikett\\Kouluprojekti\\node_modules\\axios\\dist\\node\\axios.cjs:4731:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async confirmUploads (C:\\Users\\ikett\\Kouluprojekti\\scripts\\step-10-upload-workflow.js:572:34)\n    at async main (C:\\Users\\ikett\\Kouluprojekti\\scripts\\step-10-upload-workflow.js:1102:28)"
-    }
-  ]
+  "errors": []
 }

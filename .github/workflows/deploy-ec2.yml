@@ -67,6 +67,12 @@ jobs:
         echo "Environment configuration:"
         echo "NODE_ENV=$(grep NODE_ENV .env | cut -d'=' -f2)"
         echo "CLOUD_DEPLOYMENT=$(grep CLOUD_DEPLOYMENT .env | cut -d'=' -f2)"
+        echo "USE_LAMBDA=$(grep USE_LAMBDA .env | cut -d'=' -f2)"
+        echo ""
+        echo "Lambda configuration:"
+        echo "AWS_REGION=$(grep AWS_REGION .env | cut -d'=' -f2)"
+        echo "CARE_PLAN_SCHEDULER_LAMBDA=$(grep CARE_PLAN_SCHEDULER_LAMBDA .env | cut -d'=' -f2)"
+        echo "S3_UPLOAD_NOTIFIER_LAMBDA=$(grep S3_UPLOAD_NOTIFIER_LAMBDA .env | cut -d'=' -f2)"
     
     - name: Deployment Summary
       run: |
@@ -77,3 +83,8 @@ jobs:
         echo ""
         echo "📝 Environment file: ~/scripts/.env"
         echo "🔧 Update database passwords in .env if needed"
+        echo ""
+        echo "🚀 Lambda Mode: ENABLED (USE_LAMBDA=true)"
+        echo "   - care-plan-scheduler will be invoked via AWS Lambda"
+        echo "   - s3-upload-notifier will be invoked via AWS Lambda"
+        echo "   - EC2 IAM role: EC2-Lambda-Invoke-Role"
